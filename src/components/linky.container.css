@@ -10,12 +10,6 @@
 }
 
 
-/*.header-search {
-}*/
-
-/*.header-form {
-}*/
-
 .search-input {
     padding: 8px 10px;
     border-radius: 17px;
@@ -50,8 +44,12 @@
 }
 
 .menu-posts {
-    width: 500px;
+    flex: 0 0 500px;
     background-color: rgba(0,0,0,0.15);
+}
+
+.main-post-route {
+    display: block;
 }
 
 .main-post {
@@ -94,8 +92,7 @@
 }
 
 .main-post .post-image {
-    /* images sometimes 15px width wtf? */
-    float: left;
+    flex-shrink: 0;
     margin-right: 15px;
     width: 50px;
     height: 50px;

@@ -60,7 +60,7 @@ const LinkyPost = ({ post, toggleFavourite }) => {
     };
 
     return (
-        <Link to={`/post/${post.id}`} >
+        <Link className="main-post-route" to={`/post/${post.id}`} >
             <div  className={`main-post ${post.label}`}>
                 <div className="post-image"><img className="image" src={post.image} alt={post.title} /></div>
                 <div className="post-content">

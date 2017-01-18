@@ -14,8 +14,10 @@ class LinkyContainer extends Component {
         return (
             <div>
                 <LinkyHeader />
-                <LinkyContent />
-                {this.props.children}
+                <div className="flex-row">
+                    <LinkyContent />
+                    {this.props.children}
+                </div>
                 <div>footer</div>
             </div>
         )

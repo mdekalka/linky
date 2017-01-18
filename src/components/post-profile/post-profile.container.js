@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './post-profile.css';
 
 import postsService from '../../services/posts.service';
 
 class PostProfile extends Component {
     getPostById(id) {
         const activePost = postsService.getPostById(parseInt(id));
-        debugger
+
     }
 
     componentDidMount() {
@@ -14,7 +15,7 @@ class PostProfile extends Component {
 
     render() {
         return (
-            <div>sdfdf</div>
+            <div className="post-profile">sdfdf</div>
         )
     }
 };

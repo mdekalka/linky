@@ -14,3 +14,8 @@ a:focus,
 a:hover {
     text-decoration: none;
 }
+
+
+.flex-row {
+    display: flex;
+}
