@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #181818;
+    line-height: 1.5;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+    text-decoration: none;
+}
