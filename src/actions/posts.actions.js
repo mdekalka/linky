@@ -3,8 +3,7 @@ import dbService from '../services/db.service';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
-        LOAD_POST_FAILURE,
-        TOGGLE_FAVOURITE_POST } = POSTS;
+        LOAD_POST_FAILURE } = POSTS;
 
 // Loading posts
 const requestPosts = (url) => {
@@ -51,6 +50,7 @@ const requestUpdatingPost = (id) => {
 const successUpdatingPost = (id, post) => {
     return {
         type: 'UPDATING_POST_SUCCESS',
+        id,
         post
     }
 };
@@ -64,15 +64,14 @@ const rejectUpdatingPost = (id, error) => {
 };
 
 export const updatingPost = (id, data) => (dispatch) => {
+    dispatch(requestUpdatingPost(id));
 
-    // dispatch(updatingPost(id));
-
-    // return dbService.updatePost(id, favourite)
-    //     .then(updatedPost => {
-    //         dispatch(successUpdatingPost(id, updatedPost));
-    //     })
-    //     .catch(error => {
-    //         dispatch(rejectUpdatingPost(id, error));
-    //     });
+    return dbService.updatePost(id, data)
+        .then(updatedPost => {
+            dispatch(successUpdatingPost(id, data));
+        })
+        .catch(error => {
+            dispatch(rejectUpdatingPost(id, error));
+        });
 };
 

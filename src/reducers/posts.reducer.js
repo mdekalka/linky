@@ -27,9 +27,7 @@ const postReducer = (state = initialState, action) => {
                 if (post._id.$oid !== action.id) {
                     return post;
                 } else {
-                    post.isFetching = true;
-
-                    return post;
+                    return { ...post,  isFetching: true };
                 }
             });
 
@@ -40,9 +38,7 @@ const postReducer = (state = initialState, action) => {
                 if (post._id.$oid !== action.id) {
                     return post;
                 } else {
-                    post.isFetching = false;
-
-                    return post;
+                    return { ...post, ...action.post, isFetching: false };
                 }
             });
 
@@ -53,9 +49,7 @@ const postReducer = (state = initialState, action) => {
                 if (post._id.$oid !== action.id) {
                     return post;
                 } else {
-                    post.isFetching = false;
-
-                    return post;
+                    return { ...post, isFetching: false };
                 }
             });
 

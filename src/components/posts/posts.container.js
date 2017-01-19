@@ -15,7 +15,7 @@ class LinkyContent extends Component {
         const actions = props.postsActions;
 
         this.loadPosts = actions.loadPosts;
-        this.toggleFavourite = actions.toggleFavourite;
+        this.updatingPost = actions.updatingPost;
     }
 
     getPosts() {
@@ -31,9 +31,8 @@ class LinkyContent extends Component {
         this.getPosts();
     }
 
-    onFavouriteToggle = (id, isFavourite) => {
-        debugger
-        this.toggleFavourite(id, isFavourite);
+    toggleFavourite = (id, isFavourite) => {
+        this.updatingPost(id, isFavourite);
     }
 
     render() {
@@ -43,7 +42,7 @@ class LinkyContent extends Component {
             <ul className="menu-posts">
                 {isFetching && <Loader>Loading posts...</Loader>}
                 {!isFetching && posts.map(post => {
-                    return <LinkyPost post={post} toggleFavourite={this.onFavouriteToggle} key={post._id.$oid} />
+                    return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
                 })}
             </ul>
         )
