@@ -1,0 +1,11 @@
+.form {
+
+}
+
+.form .form-group {
+    margin-bottom: 10px;
+}
+
+.form .form-label {
+    display: block;
+}

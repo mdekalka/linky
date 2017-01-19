@@ -1,0 +1,40 @@
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #2b303b;
+    color: rgba(255, 255, 255, .9);
+    font-size: 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.btn.btn-apply {
+    background-color: #658021;
+}
+
+.btn.btn-cancel {
+    background-color: #7b051f;
+}
+
+.btn:hover {
+    background-color: #404756;
+}
+
+.btn.btn-apply:hover {
+    background-color: #89b025;
+}
+
+.btn.btn-cancel:hover {
+    background-color: #9c0929;
+}
+
+.btn-group .btn {
+    margin-right: 15px;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}

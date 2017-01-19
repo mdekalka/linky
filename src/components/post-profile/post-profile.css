@@ -1,3 +1,11 @@
+.post-profile-container {
+}
+
 .post-profile {
-    flex: 1 1 auto;
+    text-align: left;
+    color: #89b025;
+}
+
+.post-profile .post-title {
+    font-size: 20px;
 }

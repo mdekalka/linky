@@ -7,6 +7,7 @@ import App from '../App';
 import LinkyContainer from '../components/linky.container';
 import LinkyContent from '../components/posts/posts.container';
 import PostProfile from '../components/post-profile/post-profile.container';
+import NewPost from '../components/post-create/post-create.container';
 
 const routes = (
     <Provider store={store} >
@@ -15,8 +16,8 @@ const routes = (
                 <Route component={LinkyContainer} >
                     <IndexRoute component={LinkyContent} />
                     <Route path="/post/:id" component={PostProfile} />
+                    <Route path="/post-create" component={NewPost} />
                 </Route>
-                
             </Route>
         </Router>
     </Provider>

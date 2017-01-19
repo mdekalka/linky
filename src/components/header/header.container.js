@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router';
 
 const LinkySearch = ({ onChange, isOpen, placeholder }) => {
     const searchCls = classNames({
@@ -9,6 +10,7 @@ const LinkySearch = ({ onChange, isOpen, placeholder }) => {
 
     return (
         <div className="header-search">
+            <Link to="/post-create">create</Link>
             <span onClick={onChange} className="search-icon">
                 <i className="fa fa-search" aria-hidden="true"></i>
             </span>
