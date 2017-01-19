@@ -5,13 +5,12 @@ const instance = axios.create({
 });
 
 const config = {
-    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu',
-    api: '?apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
-    collections: 'collections/posts'
+    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts',
+    api: '?apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC'
 };
 
-const createUrl = (path) => {
-    return `${config.baseURl}/${path}${config.api}`;
+const createUrl = (param = '') => {
+    return `${config.baseURl}/${param}${config.api}`;
 };
 
 const errorHandler = (err) => {
@@ -27,6 +26,20 @@ const dbService = {
         return instance({
             method: 'GET',
             url
+        })
+        .then(successHandler)
+        .catch(errorHandler);
+    },
+
+    updatePost(id, favourite) {
+        const url = createUrl(id);
+
+        return instance({
+            method: 'PUT',
+            url,
+            data: {
+                "$set": favourite
+            }
         })
         .then(successHandler)
         .catch(errorHandler);

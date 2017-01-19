@@ -1,4 +1,17 @@
+.loader {
+    display: inline-block;
+    text-align: center;
+}
+
+.loader-title {
+    margin-bottom: 10px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, .9);
+}
+
 .leaf-loader {
+    display: inline-block;
     width: 36px;
     height: 36px;
     position: relative;

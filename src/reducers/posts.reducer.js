@@ -22,17 +22,45 @@ const postReducer = (state = initialState, action) => {
         case LOAD_POST_FAILURE:
             return { ...state, isFetching: false, errorMessage: action.error };
 
-        case TOGGLE_FAVOURITE_POST:
-            const updatedPosts = state.items.filter(post => {
+        case 'UPDATING_POST_REQUEST':
+            const updatedAfterRequest = state.items.filter(post => {
                 if (post._id.$oid !== action.id) {
-                    return post
+                    return post;
                 } else {
-                    post.isFavourite = !post.isFavourite;
+                    post.isFetching = true;
+
                     return post;
                 }
             });
 
-            return { ...state, items: updatedPosts }
+            return { ...state, items: updatedAfterRequest };
+
+        case 'UPDATING_POST_SUCCESS':
+            const updatedAfterSuccess = state.items.filter(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                } else {
+                    post.isFetching = false;
+
+                    return post;
+                }
+            });
+
+            return { ...state, items: updatedAfterSuccess };
+
+        case 'UPDATING_POST_FAILURE':
+            const updatedAfterFailure = state.items.filter(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                } else {
+                    post.isFetching = false;
+
+                    return post;
+                }
+            });
+
+            return { ...state, items: updatedAfterFailure };
+        
 
         default:
             return state;
