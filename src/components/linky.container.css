@@ -44,8 +44,16 @@
 }
 
 .menu-posts {
-    flex: 0 0 500px;
+    position: absolute;
+    width: 500px;
+    bottom: 0;
+    top: 0;
     background-color: rgba(0,0,0,0.15);
+    overflow-y: auto;
+}
+.menu-list {
+    display: flex;
+    flex-direction: column;
 }
 
 .main-post-route {
@@ -105,8 +113,6 @@
     opacity: 1;
 }
 
-
-
 .main-post .post-image {
     flex-shrink: 0;
     margin-right: 15px;
@@ -123,6 +129,10 @@
 
 .post-content {
     overflow: hidden;
+}
+
+.post-content .loader {
+    margin-left: 10px;
 }
 
 .post-favourite {

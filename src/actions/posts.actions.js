@@ -75,3 +75,11 @@ export const updatingPost = (id, data) => (dispatch) => {
         });
 };
 
+// Set active post
+export const setActivePost = (id) => {
+    return {
+        type: 'SET_ACTIVE_POST',
+        id
+    }
+};
+

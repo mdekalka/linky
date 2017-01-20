@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './post-profile.css';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
 
-import postsService from '../../services/posts.service';
+import { setActivePost } from '../../actions/posts.actions';
 
 const template = `// parent state
 .state('app', {
@@ -53,13 +55,11 @@ $transitions.onStart( { to: 'app.**' }, function(trans) {
 });`
 
 class PostProfile extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
-        this.state = {
-            activePost: {}
-        };
-    }
+        this.setActivePost = props.setActivePost;
+    };
 
     componentDidMount() {
         this.getPostById(this.props.params.id);
@@ -67,24 +67,22 @@ class PostProfile extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.params.id !== this.props.params.id) {
-            this.getPostById(nextProps.params.id);
+            this.setActivePost(nextProps.params.id);
         }
     }
 
     getPostById(id) {
-        const activePost = postsService.getPostById(parseInt(id));
-
-        this.setState({ activePost });
+        this.setActivePost(id);
     }
 
     toggleFavourite = (id) => {
-        const { activePost } = this.state;
+        // const { activePost } = this.props;
 
-        if (activePost) {
-            activePost.isFavourite = !activePost.isFavourite;
-        }
+        // if (activePost) {
+        //     activePost.isFavourite = !activePost.isFavourite;
+        // }
 
-        this.setState({ activePost });
+        // this.setState({ activePost });
     }
 
     renderPost(post) {
@@ -109,7 +107,7 @@ class PostProfile extends Component {
     }
 
     render() {
-        const { activePost } = this.state;
+        const { activePost } = this.props;
 
         return (
             <div className="post-profile-container">
@@ -121,5 +119,19 @@ class PostProfile extends Component {
         )
     }
 };
+
+const mapStateToProps = (state) => {
+    return {
+        activePost: state.posts.activePost
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setActivePost: bindActionCreators(setActivePost, dispatch)
+    }
+};
+
+PostProfile = connect(mapStateToProps, mapDispatchToProps)(PostProfile);
 
 export default PostProfile;

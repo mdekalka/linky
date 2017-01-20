@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import classNames from 'classnames';
 
 import Loader from '../../components/loader/loader.component';
+import ErrorMessage from '../../components/error/error.component';
 import * as postsActions from '../../actions/posts.actions';
 import dbService from '../../services/db.service';
 
@@ -36,15 +37,20 @@ class LinkyContent extends Component {
     }
 
     render() {
-        const { posts, isFetching } = this.props;
+        const { posts, isFetching, errorMessage } = this.props;
 
         return (
-            <ul className="menu-posts">
-                {isFetching && <Loader>Loading posts...</Loader>}
-                {!isFetching && posts.map(post => {
-                    return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
-                })}
-            </ul>
+            <div className="menu-posts">
+                {isFetching && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
+                {!isFetching && 
+                    <ul className="menu-list">
+                        {posts.map(post => {
+                            return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
+                        })}
+                    </ul>
+                }
+                {(errorMessage && !isFetching) && <div className="flex-center"><ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} /></div>}
+            </div>
         )
     }
 };
@@ -52,7 +58,9 @@ class LinkyContent extends Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.posts.items,
-        isFetching: state.posts.isFetching
+        isFetching: state.posts.isFetching,
+        errorMessage: state.posts.errorMessage
+
     }
 };
 
@@ -65,12 +73,11 @@ const mapDispatchToProps = (dispatch) => {
 LinkyContent = connect(mapStateToProps, mapDispatchToProps)(LinkyContent);
 
 const LinkyPost = ({ post, toggleFavourite }) => {
-    const onToggle = (event, id, isFavourite) => {
-        event.preventDefault();
+    const onToggle = (id, isFavourite) => {
         toggleFavourite(id, { isFavourite: !isFavourite });
     };
 
-    const { $oid: id } = post._id;
+    let { _id: { $oid: id }, isFetching } = post;
 
     return (
         <li>
@@ -80,9 +87,14 @@ const LinkyPost = ({ post, toggleFavourite }) => {
                     <div className="post-content">
                         <div>
                             <h5 className="post-title">{post.title}</h5>
-                            <span onClick={(event) => onToggle(event, id, post.isFavourite)} className="post-favourite">
-                                <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
-                            </span>
+                            {/* Note: How to avoid this conditional statement for better readability?
+                                TODO: Find a better solution for this boilerplate conditions */}
+                            {!isFetching &&
+                                <span onClick={(event) => onToggle(id, post.isFavourite)} className="post-favourite">
+                                    <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
+                                </span>
+                            }
+                            {isFetching && <Loader size="small" />}
                         </div>
                         <time className="post-time">{post.date}</time>
                         <p className="post-description">{post.description}</p>
