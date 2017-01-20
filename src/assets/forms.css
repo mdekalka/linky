@@ -1,11 +1,35 @@
 .form {
-
+    margin: 10px 0;
+    width: 100%;
 }
 
 .form .form-group {
     margin-bottom: 10px;
 }
 
+.form .form-input {
+    padding: 5px 8px;
+    font-size: 14px;
+    outline: none;
+    border: 1px solid transparent;
+    width: 100%;
+    font-family: 'Open Sans';
+    background-color: #2b303b;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form .form-input:focus {
+    border: 1px solid #89b025;
+}
+
+.form .form-input.textarea {
+    min-height: 400px;
+    max-height: 600px;
+    max-width: 100%;
+}
+
+
 .form .form-label {
+    font-size: 15px;
     display: block;
 }

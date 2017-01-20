@@ -1,4 +1,5 @@
 import { POSTS } from '../constants/constants';
+import { createSelector } from 'reselect'
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
@@ -7,7 +8,7 @@ const initialState = {
     items: [],
     isFetching: false,
     errorMessage: '',
-    activePost: {}
+    activeId: ''
 };
 
 const postReducer = (state = initialState, action) => {
@@ -55,13 +56,21 @@ const postReducer = (state = initialState, action) => {
             return { ...state, items: updatedAfterFailure };
 
         case 'SET_ACTIVE_POST':
-            const activePost = state.items.find(post => post._id.$oid === action.id);
+            return { ...state, activeId: action.id };
+            // const activePost = state.items.find(post => post._id.$oid === action.id);
 
-            return activePost ? { ...state, activePost } : { ...state, activePost: {} }
+            // return activePost ? { ...state, activePost } : { ...state, activePost: {} }
 
         default:
             return state;
     }
 };
+
+const getPosts = (state) => state.posts.items;
+const getActiveId = (state) => state.posts.activeId;
+
+export const selectActivePost = createSelector([getActiveId, getPosts], (id, posts) => {
+    return posts.find(post => post._id.$oid === id) || {};
+});
 
 export default postReducer;

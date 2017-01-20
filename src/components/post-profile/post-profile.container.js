@@ -6,9 +6,12 @@ import { bindActionCreators } from 'redux';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
 
+import Loader from '../loader/loader.component';
 import { setActivePost } from '../../actions/posts.actions';
+import { updatingPost } from '../../actions/posts.actions';
+import { selectActivePost } from '../../reducers/posts.reducer';
 
-const template = `// parent state
+let template = `// parent state
 .state('app', {
     component: app,
     // ...
@@ -54,11 +57,16 @@ $transitions.onStart( { to: 'app.**' }, function(trans) {
     }
 });`
 
+template = '$transitions.onStart( { to: \'app.**\' }, function(trans) { var $state = trans.router.stateService; The transition will wait for this promise o settle return authService.authenticate().catch(function() {'
+
 class PostProfile extends Component {
     constructor(props) {
         super(props);
 
-        this.setActivePost = props.setActivePost;
+        const actions = props.postsActions;
+
+        this.setActivePost = actions.setActivePost;
+        this.updatingPost = actions.updatingPost;
     };
 
     componentDidMount() {
@@ -75,30 +83,31 @@ class PostProfile extends Component {
         this.setActivePost(id);
     }
 
-    toggleFavourite = (id) => {
-        // const { activePost } = this.props;
-
-        // if (activePost) {
-        //     activePost.isFavourite = !activePost.isFavourite;
-        // }
-
-        // this.setState({ activePost });
+    toggleFavourite = (id, isFavourite) => {
+        this.updatingPost(id, isFavourite);
     }
 
     renderPost(post) {
         if (!_.isEmpty(post)) {
+            const { _id: { $oid: id }, isFetching } = post;
             return (
                 <div className="post-profile">
                     <div>
                         <h5 className="post-title">{post.title}</h5>
-                        <span onClick={() => this.toggleFavourite(post.id)} className="post-favourite">
-                            <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
-                        </span>
+                        {!isFetching &&
+                            <span onClick={() => this.toggleFavourite(id, {isFavourite: !post.isFavourite})} className="post-favourite">
+                                <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
+                            </span>
+                        }
+                        {isFetching && <Loader size="small" />}
                     </div>
                     <div className="post-tags">
                         [{post.tags.map((tag, idx) => <span className="post-tag" key={idx}>{tag}</span>)}]
                     </div>
-                    <div className="post-text post-description">{post.description}</div> 
+                    <div className="post-text post-description">{post.description}</div>
+                    <PrismCode className="language-javascript">
+                        {post.code}
+                    </PrismCode>
                 </div>
             )
         } else {
@@ -112,9 +121,6 @@ class PostProfile extends Component {
         return (
             <div className="post-profile-container">
                 {this.renderPost(activePost)}
-                <PrismCode className="language-javascript">
-                    {template}
-                </PrismCode>
             </div>
         )
     }
@@ -122,13 +128,13 @@ class PostProfile extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        activePost: state.posts.activePost
+        activePost: selectActivePost(state)
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setActivePost: bindActionCreators(setActivePost, dispatch)
+        postsActions: bindActionCreators({ setActivePost, updatingPost }, dispatch)
     }
 };
 

@@ -1,0 +1,8 @@
+.new-post-container .post-title {
+    display: block;
+}
+
+.new-post-form {
+    display: inline-block;
+    width: 50%;
+}

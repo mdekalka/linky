@@ -21,7 +21,7 @@ const successHandler = (response) => response.data;
 
 const dbService = {
     getPosts() {
-        const url = createUrl(config.collections);
+        const url = createUrl();
 
         return instance({
             method: 'GET',
@@ -46,10 +46,10 @@ const dbService = {
     },
 
     addPost(post) {
-        const url = createUrl(config.collections);
+        const url = createUrl();
 
         return instance({
-              method: 'post',
+              method: 'POST',
               url,
               data: post
         })

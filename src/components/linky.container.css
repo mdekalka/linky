@@ -131,10 +131,6 @@
     overflow: hidden;
 }
 
-.post-content .loader {
-    margin-left: 10px;
-}
-
 .post-favourite {
     margin-left: 10px;
     cursor: pointer;
@@ -154,6 +150,10 @@
     font-size: 16px;
     color: #89b025;
     margin-bottom: 5px;
+}
+
+.post-title + .loader {
+    margin-left: 10px;
 }
 
 .post-description {

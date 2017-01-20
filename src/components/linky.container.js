@@ -9,6 +9,7 @@ class LinkyContainer extends Component {
     render() {
         return (
             <div className="main-content">
+                <LinkyHeader />
                 <div className="flex-row">
                     <LinkyContent />
                     <div className="flex-column">{this.props.children}</div>

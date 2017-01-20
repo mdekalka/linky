@@ -73,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
 LinkyContent = connect(mapStateToProps, mapDispatchToProps)(LinkyContent);
 
 const LinkyPost = ({ post, toggleFavourite }) => {
-    const onToggle = (id, isFavourite) => {
+    const onToggle = (event, id, isFavourite) => {
+        event.preventDefault();
         toggleFavourite(id, { isFavourite: !isFavourite });
     };
 
@@ -83,14 +84,14 @@ const LinkyPost = ({ post, toggleFavourite }) => {
         <li>
             <Link className="main-post-route" to={`/post/${id}`} activeClassName="active">
                 <div className={`main-post ${post.label}`}>
-                    <div className="post-image"><img className="image" src={post.image} alt={post.title} /></div>
+                    <div className="post-image"><img className="image" src={post.label.image} alt={post.title} /></div>
                     <div className="post-content">
                         <div>
                             <h5 className="post-title">{post.title}</h5>
                             {/* Note: How to avoid this conditional statement for better readability?
                                 TODO: Find a better solution for this boilerplate conditions */}
                             {!isFetching &&
-                                <span onClick={(event) => onToggle(id, post.isFavourite)} className="post-favourite">
+                                <span onClick={(event) => onToggle(event, id, post.isFavourite)} className="post-favourite">
                                     <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
                                 </span>
                             }
