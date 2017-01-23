@@ -1,6 +1,7 @@
 .form {
     margin: 10px 0;
     width: 100%;
+    font-size: 16px;
 }
 
 .form .form-group {
@@ -28,8 +29,12 @@
     max-width: 100%;
 }
 
-
 .form .form-label {
     font-size: 15px;
     display: block;
+}
+
+.form .form-meta {
+    font-size: 13px;
+    color: rgb(154, 151, 151);
 }

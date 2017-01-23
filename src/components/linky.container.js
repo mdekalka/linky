@@ -12,7 +12,7 @@ class LinkyContainer extends Component {
                 <LinkyHeader />
                 <div className="flex-row">
                     <LinkyContent />
-                    <div className="flex-column">{this.props.children}</div>
+                    <div className="flex-separate">{this.props.children}</div>
                 </div>
                 <div>footer</div>
             </div>

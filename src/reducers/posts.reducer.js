@@ -11,6 +11,40 @@ const initialState = {
     activeId: ''
 };
 
+const updatePostReducer = (state, action) => {
+    switch (action.type) {
+        case 'UPDATING_POST_REQUEST':
+            return state.map(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                } else {
+                    return  { ...post,  isFetching: true };
+                }
+            });
+
+        case 'UPDATING_POST_SUCCESS':
+            return state.map(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                } else {
+                    return{ ...post, ...action.post, isFetching: false };
+                }
+            });
+
+        case 'UPDATING_POST_FAILURE':
+            return state.map(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                } else {
+                    return { ...post, isFetching: false };
+                }
+            });
+
+        default:
+            return state;
+    }
+};
+
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_POST_REQUEST:
@@ -23,43 +57,16 @@ const postReducer = (state = initialState, action) => {
             return { ...state, isFetching: false, errorMessage: action.error };
 
         case 'UPDATING_POST_REQUEST':
-            const updatedAfterRequest = state.items.map(post => {
-                if (post._id.$oid !== action.id) {
-                    return post;
-                } else {
-                    return  { ...post,  isFetching: true };
-                }
-            });
-
-            return { ...state, items: updatedAfterRequest };
+            return { ...state, items: updatePostReducer(state.items, action) };
 
         case 'UPDATING_POST_SUCCESS':
-            const updatedAfterSuccess = state.items.map(post => {
-                if (post._id.$oid !== action.id) {
-                    return post;
-                } else {
-                    return{ ...post, ...action.post, isFetching: false };
-                }
-            });
-
-            return { ...state, items: updatedAfterSuccess };
+            return { ...state, items: updatePostReducer(state.items, action) };
 
         case 'UPDATING_POST_FAILURE':
-            const updatedAfterFailure = state.items.map(post => {
-                if (post._id.$oid !== action.id) {
-                    return post;
-                } else {
-                    return { ...post, isFetching: false };
-                }
-            });
-
-            return { ...state, items: updatedAfterFailure };
+            return { ...state, items: updatePostReducer(state.items, action) };
 
         case 'SET_ACTIVE_POST':
             return { ...state, activeId: action.id };
-            // const activePost = state.items.find(post => post._id.$oid === action.id);
-
-            // return activePost ? { ...state, activePost } : { ...state, activePost: {} }
 
         default:
             return state;

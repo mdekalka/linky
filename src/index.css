@@ -34,7 +34,7 @@ a:hover {
     height: 100%;
 }
 
-.flex-column {
+.flex-separate {
     position: relative;
     margin-left: 500px;
     flex: 1 1 auto;

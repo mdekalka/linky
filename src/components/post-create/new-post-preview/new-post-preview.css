@@ -1,0 +1,8 @@
+.preview-image .image {
+    width: 100px;
+    height: 100px;
+}
+
+.post-preview .post-favourite {
+    cursor: default;
+}

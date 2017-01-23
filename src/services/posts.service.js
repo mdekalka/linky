@@ -33,7 +33,7 @@ const postsService = {
     prepareNewItem(config) {
         const defaultConfig = {
             isFavourite: false,
-            now: utilsService.getCurrentTime()
+            date: utilsService.getCurrentTime()
         };
 
         return _.assign(config, defaultConfig);

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import dateFormat from 'dateformat';
 import classNames from 'classnames';
 
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
 import * as postsActions from '../../actions/posts.actions';
-import dbService from '../../services/db.service';
 
 class LinkyContent extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class LinkyContent extends Component {
 
     getPosts() {
         this.loadPosts().then(() => {
-            // TODO: fires after success items received
+            // Note: fires after success items received
         })
         .catch(error => {
             console.log(error);
@@ -83,8 +83,8 @@ const LinkyPost = ({ post, toggleFavourite }) => {
     return (
         <li>
             <Link className="main-post-route" to={`/post/${id}`} activeClassName="active">
-                <div className={`main-post ${post.label}`}>
-                    <div className="post-image"><img className="image" src={post.label.image} alt={post.title} /></div>
+                <div className={`main-post ${post.activeLabel}`}>
+                    <div className="post-image"><img className="image" src={post.activeLabel.image} alt={post.title} /></div>
                     <div className="post-content">
                         <div>
                             <h5 className="post-title">{post.title}</h5>
@@ -97,11 +97,10 @@ const LinkyPost = ({ post, toggleFavourite }) => {
                             }
                             {isFetching && <Loader size="small" />}
                         </div>
-                        <time className="post-time">{post.date}</time>
-                        <p className="post-description">{post.description}</p>
                         <div className="post-tags">
                             [{post.tags.map((tag, idx) => <span className="post-tag" key={idx}>{tag}</span>)}]
                         </div>
+                        <time className="post-time">{dateFormat(post.date, 'mmmm dS, yyyy')}</time>
                     </div>
                 </div>
             </Link>
