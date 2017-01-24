@@ -20,12 +20,15 @@ class LinkyContent extends Component {
     }
 
     getPosts() {
-        this.loadPosts().then(() => {
-            // Note: fires after success items received
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        if (!this.isPostsLoaded) {
+            this.loadPosts().then(() => {
+                // Note: fires after success items received
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
     }
 
     componentDidMount() {
@@ -36,11 +39,17 @@ class LinkyContent extends Component {
         this.updatingPost(id, isFavourite);
     }
 
+    get isPostsLoaded() {
+        const { posts, isFetching } = this.props;
+
+        return (!!posts.length && !isFetching);
+    }
+
     render() {
         const { posts, isFetching, errorMessage } = this.props;
 
         return (
-            <div className="menu-posts">
+            <div className="posts-nav-menu">
                 {isFetching && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
                 {!isFetching && 
                     <ul className="menu-list">
@@ -83,7 +92,7 @@ const LinkyPost = ({ post, toggleFavourite }) => {
     return (
         <li>
             <Link className="main-post-route" to={`/post/${id}`} activeClassName="active">
-                <div className={`main-post ${post.activeLabel}`}>
+                <div className={`main-post ${post.activeLabel.name}`}>
                     <div className="post-image"><img className="image" src={post.activeLabel.image} alt={post.title} /></div>
                     <div className="post-content">
                         <div>

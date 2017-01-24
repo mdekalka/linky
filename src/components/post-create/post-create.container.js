@@ -17,7 +17,21 @@ class PostCreator extends Component {
                 title: 'My first super javascript post',
                 activeLabel: {},
                 tags: ['javascript', 'algorithm'],
-                code: 'var component = {\n\tname: "react-codemirror",\n\tauthor: "Jed Watson",\n\trepo: "https://github.com/JedWatson/react-codemirror"\n};'
+                isFavourite: false,
+                code: [
+                    '# Live demo\n\nChanges are automatically rendered as you type.\n\n* Follows the ',
+                    '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
+                    'elements\n* Allows you to escape or skip HTML (try toggling the checkboxes above)',
+                    '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n',
+                    '\n## HTML block below\n\n<blockquote>\n    This blockquote will change based ',
+                    'on the HTML settings above.\n</blockquote>\n\n## How about some code?\n',
+                    '```js\nvar React = require(\'react\');\nvar Markdown = require(\'react-markdown\');',
+                    '\n\nReact.render(\n    <Markdown source="# Your markdown here" />,\n    document.',
+                    'getElementById(\'content\')\n);\n```\n\nPretty neat, eh?\n\n', '## More info?\n\n',
+                    'Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)\n\n',
+                    '---------------\n\n',
+                    'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal'
+                ].join('')
             }
         };
     }
@@ -64,9 +78,10 @@ class PostCreator extends Component {
 
     onTagsUpdate = (tags) => {
         const postModel = this.state.postModel;
+        const tagsArray = tags.split(',')
 
         this.setState({
-            postModel: { ...postModel, tags }
+            postModel: { ...postModel, tags:tagsArray }
         });
     }
 
@@ -79,17 +94,19 @@ class PostCreator extends Component {
         const now = dateFormat(new Date(), 'mmmm dS, yyyy');
 
         return (
-            <div className="post-creator-container">
-                <NewPost 
-                    labels={labels}
-                    model={postModel}
-                    createNewPost={this.createNewPost}
-                    updateCode={this.updateCode}
-                    onTagsUpdate={this.onTagsUpdate}
-                    onModelUpdate={this.onModelUpdate}
-                    setActiveItem={this.setActiveItem} />
-                <PostPreview {...postModel} time={now} />
-            </div>
+            <main className="main">
+                <div className="post-creator-container">
+                    <NewPost 
+                        labels={labels}
+                        model={postModel}
+                        createNewPost={this.createNewPost}
+                        updateCode={this.updateCode}
+                        onTagsUpdate={this.onTagsUpdate}
+                        onModelUpdate={this.onModelUpdate}
+                        setActiveItem={this.setActiveItem} />
+                    <PostPreview {...postModel} time={now} />
+                </div>
+            </main>
         )
     }
 }

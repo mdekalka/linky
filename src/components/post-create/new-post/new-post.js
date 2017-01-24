@@ -11,14 +11,13 @@ class NewPost extends Component {
         super(props);
 
         this.options = {
-            theme: 'monokai',
-            mode: 'javascript'
+            mode: 'javascript',
+            theme: 'monokai'
         };
     }
 
     render() {
         const { labels, model, setActiveItem, onTagsUpdate, onModelUpdate, updateCode, createNewPost } = this.props;
-
         const options = this.options;
 
         return (
@@ -33,13 +32,19 @@ class NewPost extends Component {
                         <LabelSelect list={labels} activeItem={model.activeLabel} onSelect={setActiveItem} />
                     </div>
                     <div className="form-group">
+                        <label className="form-label">
+                            <input type="checkbox" checked={model.isFavourite} onChange={(event) => onModelUpdate({ ...model, isFavourite: event.target.checked  })} />
+                            <span>Favourite post</span>
+                        </label>
+                    </div>
+                    <div className="form-group">
                         <label className="form-label">Tags: * <span className="form-meta">(comma separated values)</span></label>
                         <TagsSelect onUpdate={onTagsUpdate} value={model.tags} />
                     </div>
                     <div className="form-group">
                         <CodeMirror value={model.code} onChange={updateCode} options={options} />
                     </div>
-                     <div className="btn-group">
+                    <div className="btn-group">
                         <button className="btn btn-apply">Create</button>
                         <Link to="/" className="btn btn-primary">Return to</Link>
                     </div>

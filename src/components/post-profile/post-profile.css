@@ -1,7 +1,9 @@
 .post-profile-container {
+    width: 100%;
 }
 
 .post-profile {
+    padding: 25px;
     text-align: left;
     color: #89b025;
 }

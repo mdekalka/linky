@@ -1,5 +1,4 @@
 import { POSTS } from '../constants/constants';
-import dbService from '../services/db.service';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
@@ -8,8 +7,7 @@ const { LOAD_POST_REQUEST,
 // Loading posts
 const requestPosts = (url) => {
     return {
-        type: LOAD_POST_REQUEST,
-        url
+        type: LOAD_POST_REQUEST
     }
 };
 
@@ -27,10 +25,10 @@ const rejectPosts = (error) => {
     }
 }
 
-export const loadPosts = () => (dispatch, /*getState*/) => {
+export const loadPosts = () => (dispatch, getState, postsAPI) => {
     dispatch(requestPosts());
 
-    return dbService.getPosts()
+    return postsAPI.getPosts()
         .then(posts => {
             dispatch(receivePosts(posts));
         })
@@ -63,10 +61,10 @@ const rejectUpdatingPost = (id, error) => {
     }
 };
 
-export const updatingPost = (id, data) => (dispatch) => {
+export const updatingPost = (id, data) => (dispatch, getState, postsAPI) => {
     dispatch(requestUpdatingPost(id));
 
-    return dbService.updatePost(id, data)
+    return postsAPI.updatePost(id, data)
         .then(updatedPost => {
             dispatch(successUpdatingPost(id, data));
         })
@@ -82,4 +80,5 @@ export const setActivePost = (id) => {
         id
     }
 };
+
 

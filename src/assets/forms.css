@@ -5,7 +5,7 @@
 }
 
 .form .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .form .form-input {
@@ -15,7 +15,7 @@
     border: 1px solid transparent;
     width: 100%;
     font-family: 'Open Sans';
-    background-color: #2b303b;
+    background-color: #000;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -38,3 +38,13 @@
     font-size: 13px;
     color: rgb(154, 151, 151);
 }
+
+input[type="checkbox"] {
+    display: inline-block;
+    padding: 8px;
+    border-radius: 2px;
+    position: relative;
+    margin-right: 5px;
+    background-color: red;
+}
+

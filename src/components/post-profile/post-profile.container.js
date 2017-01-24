@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
-// import ReactMarkdown from 'react-markdown';
 
 import Loader from '../loader/loader.component';
 import { setActivePost } from '../../actions/posts.actions';
@@ -26,9 +25,9 @@ class PostProfile extends Component {
         this.getPostById(this.props.params.id);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.params.id !== this.props.params.id) {
-            this.setActivePost(nextProps.params.id);
+    componentDidUpdate(prevProps) {
+        if (this.props.params.id !== prevProps.params.id) {
+            this.setActivePost(this.props.params.id);
         }
     }
 

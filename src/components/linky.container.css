@@ -1,14 +1,11 @@
 .main-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
     padding: 25px;
     background-color: #2b303b;
 }
-
-.main-header::after {
-    content: '';
-    display: block;
-    clear: both;
-}
-
 
 .search-input {
     padding: 8px 10px;
@@ -28,10 +25,6 @@
     pointer-events: all;
 }
 
-.header-search {
-    float: right;
-}
-
 .header-form {
     float: right;
 }
@@ -43,17 +36,25 @@
     cursor: pointer;
 }
 
-.menu-posts {
-    position: absolute;
+.posts-nav-menu {
     width: 500px;
-    bottom: 0;
-    top: 0;
-    background-color: rgba(0,0,0,0.15);
-    overflow-y: auto;
-}
-.menu-list {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+}
+
+.menu-list {
+    /*display: flex;
+    flex-direction: column;*/
+    /*flex: 1 1 auto;*/
+    overflow-y: auto;
+    /*min-height: 0px;*/
+}
+
+.main-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    overflow-y: auto;
 }
 
 .main-post-route {
@@ -77,6 +78,10 @@
     text-align: left;
     transition: background-color .2s ease-in-out;
     cursor: pointer;
+}
+
+.main-post.javascript::after {
+    background-color: #f0db4f;
 }
 
 .main-post.angular::after {

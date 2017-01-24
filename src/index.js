@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
-import './assets/reset.css';
+// import './assets/reset.css';
+import './assets/normalize.css';
 import './assets/font-awesome.css';
 import './assets/forms.css';
 import './assets/code-mirror/code-mirror.css';
