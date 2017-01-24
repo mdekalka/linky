@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dateFormat from 'dateformat';
 import classNames from 'classnames';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
@@ -19,16 +20,13 @@ class LinkyContent extends Component {
         this.updatingPost = actions.updatingPost;
     }
 
-    getPosts() {
-        if (!this.isPostsLoaded) {
+    getPosts = () => {
             this.loadPosts().then(() => {
                 // Note: fires after success items received
             })
             .catch(error => {
                 console.log(error);
             });
-        }
-
     }
 
     componentDidMount() {
@@ -46,18 +44,25 @@ class LinkyContent extends Component {
     }
 
     render() {
-        const { posts, isFetching, errorMessage } = this.props;
+        const { posts, isFetching, isFirstLoad, errorMessage } = this.props;
 
         return (
             <div className="posts-nav-menu">
-                {isFetching && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
-                {!isFetching && 
+                {(isFetching && isFirstLoad) && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
+                <InfiniteScroll
+                    className="flex"
+                    pageStart={0}
+                    loadMore={this.getPosts}
+                    initialLoad={false}
+                    hasMore={true}
+                    loader={!isFirstLoad && <Loader />}
+                    useWindow={false}>
                     <ul className="menu-list">
                         {posts.map(post => {
                             return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
                         })}
                     </ul>
-                }
+                </InfiniteScroll>
                 {(errorMessage && !isFetching) && <div className="flex-center"><ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} /></div>}
             </div>
         )
@@ -68,6 +73,7 @@ const mapStateToProps = (state) => {
     return {
         posts: state.posts.items,
         isFetching: state.posts.isFetching,
+        isFirstLoad: state.posts.isFirstLoad,
         errorMessage: state.posts.errorMessage
 
     }

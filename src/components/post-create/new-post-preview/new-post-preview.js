@@ -22,7 +22,7 @@ const PostPreview = ({ title, time, isFavourite, activeLabel, tags, code }) => {
                 </div>
             }
             <time className="post-time">{time}</time>
-            <PrismCode className="language-javascript">
+            <PrismCode className="code-preview language-javascript">
                 {code}
             </PrismCode>
         </div>

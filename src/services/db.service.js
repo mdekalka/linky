@@ -5,8 +5,10 @@ const instance = axios.create({
 });
 
 const config = {
-    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts',
-    api: '?apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC'
+    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts?',
+    api: '&apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
+    page: 0,
+    pageSize: 10
 };
 
 const createUrl = (param = '') => {
@@ -17,11 +19,15 @@ const errorHandler = (err) => {
     throw new Error(err);
 };
 
-const successHandler = (response) => response.data;
+const successHandler = (response) => {
+    config.page += config.pageSize;
+
+    return response.data;
+};
 
 const dbService = {
     getPosts() {
-        const url = createUrl();
+        const url = createUrl(`&sk=${config.page}&l=${config.pageSize}`);
 
         return instance({
             method: 'GET',
@@ -31,14 +37,14 @@ const dbService = {
         .catch(errorHandler);
     },
 
-    updatePost(id, favourite) {
+    updatePost(id, model) {
         const url = createUrl(id);
 
         return instance({
             method: 'PUT',
             url,
             data: {
-                "$set": favourite
+                "$set": model
             }
         })
         .then(successHandler)

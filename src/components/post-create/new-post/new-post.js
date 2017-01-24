@@ -22,20 +22,19 @@ class NewPost extends Component {
 
         return (
             <div className="new-post-container flex-column">
-                <h4 className="post-title" >Create new code snippet</h4>
                 <form className="form new-post-form" onSubmit={createNewPost}>
                     <div className="form-group">
                         <label className="form-label">Title: *</label>
                         <input className="form-input" type="text" value={model.title} onChange={(event) => onModelUpdate({...model, title: event.target.value})} />
                     </div>
                     <div className="form-group">
-                        <LabelSelect list={labels} activeItem={model.activeLabel} onSelect={setActiveItem} />
-                    </div>
-                    <div className="form-group">
                         <label className="form-label">
                             <input type="checkbox" checked={model.isFavourite} onChange={(event) => onModelUpdate({ ...model, isFavourite: event.target.checked  })} />
                             <span>Favourite post</span>
                         </label>
+                    </div>
+                    <div className="form-group">
+                        <LabelSelect list={labels} activeItem={model.activeLabel} onSelect={setActiveItem} />
                     </div>
                     <div className="form-group">
                         <label className="form-label">Tags: * <span className="form-meta">(comma separated values)</span></label>

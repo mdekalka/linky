@@ -7,6 +7,8 @@ const { LOAD_POST_REQUEST,
 const initialState = {
     items: [],
     isFetching: false,
+    hasMoreItems: true,
+    isFirstLoad: true,
     errorMessage: '',
     activeId: ''
 };
@@ -51,7 +53,7 @@ const postReducer = (state = initialState, action) => {
             return { ...state, isFetching: true, errorMessage: '' };
 
         case LOAD_POST_SUCCESS:
-            return { ...state, isFetching: false, errorMessage: '', items: action.posts };
+            return { ...state, isFetching: false, errorMessage: '', isFirstLoad: false, items: [ ...state.items, ...action.posts ] };
 
         case LOAD_POST_FAILURE:
             return { ...state, isFetching: false, errorMessage: action.error };

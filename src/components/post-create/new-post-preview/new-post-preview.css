@@ -6,3 +6,7 @@
 .post-preview .post-favourite {
     cursor: default;
 }
+
+.post-preview .code-preview {
+    overflow-x: auto;
+}

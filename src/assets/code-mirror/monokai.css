@@ -1,6 +1,7 @@
 .cm-s-monokai.CodeMirror {
     background-color: #000;
     color: #f8f8f2;
+    height: 500px;
 }
 
 .cm-s-monokai div.CodeMirror-selected {

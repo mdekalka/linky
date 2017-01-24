@@ -41,13 +41,16 @@
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
+    overflow-y: auto;
 }
 
 .menu-list {
     /*display: flex;
     flex-direction: column;*/
     /*flex: 1 1 auto;*/
-    overflow-y: auto;
+    /* Note: actual property */
+    /*overflow-y: auto;*/
+
     /*min-height: 0px;*/
 }
 
