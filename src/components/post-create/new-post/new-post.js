@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 require('codemirror/mode/javascript/javascript');
 
+import Loader from '../../../components/loader/loader.component';
 import LabelSelect from '../../../components/label-select/label-select.container';
 import TagsSelect from '../../../components/tags-select/tags-select';
 
@@ -17,7 +19,7 @@ class NewPost extends Component {
     }
 
     render() {
-        const { labels, model, setActiveItem, onTagsUpdate, onModelUpdate, updateCode, createNewPost } = this.props;
+        const { labels, model, isAdding, setActiveItem, onTagsUpdate, onModelUpdate, updateCode, createNewPost } = this.props;
         const options = this.options;
 
         return (
@@ -44,8 +46,9 @@ class NewPost extends Component {
                         <CodeMirror value={model.code} onChange={updateCode} options={options} />
                     </div>
                     <div className="btn-group">
-                        <button className="btn btn-apply">Create</button>
-                        <Link to="/" className="btn btn-primary">Return to</Link>
+                        <button disabled={isAdding} className="btn btn-apply">Create</button>
+                        <Link to="/" className={classNames('btn btn-primary', {'disabled': isAdding})} >Return to</Link>
+                        {isAdding && <Loader />}
                     </div>
                 </form>
             </div>

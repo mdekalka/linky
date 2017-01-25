@@ -26,7 +26,7 @@ class LinkyContent extends Component {
         if (isFetching) {
             return;
         }
-        
+
         this.loadPosts().then(() => {
             // Note: fires after success items received
         })
@@ -69,7 +69,12 @@ class LinkyContent extends Component {
                         })}
                     </ul>
                 </InfiniteScroll>
-                {(errorMessage && !isFetching) && <div className="flex-center"><ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} /></div>}
+                {(errorMessage && !isFetching) &&
+                    <div className="flex-center">
+                        <ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} />
+                    </div>
+                }
+                {(!isFetching && !posts.length) && <div className="flex-center">No items available</div>}
             </div>
         )
     }

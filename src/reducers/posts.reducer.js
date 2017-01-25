@@ -1,9 +1,10 @@
+import { POSTS_ACTIONS } from '../constants/constants';
 import { POSTS } from '../constants/constants';
 import { createSelector } from 'reselect'
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
-        LOAD_POST_FAILURE } = POSTS;
+        LOAD_POST_FAILURE } = POSTS_ACTIONS;
 const initialState = {
     items: [],
     isFetching: false,
@@ -12,6 +13,7 @@ const initialState = {
     errorMessage: '',
     activeId: ''
 };
+const { PAGE_SIZE } = POSTS;
 
 const updatePostReducer = (state, action) => {
     switch (action.type) {
@@ -53,7 +55,9 @@ const postReducer = (state = initialState, action) => {
             return { ...state, isFetching: true, errorMessage: '' };
 
         case LOAD_POST_SUCCESS:
-            const hasMoreItems = action.posts.length ? true : false;
+            // Note: mlab does not provide total property in query request(only in separate request)
+            // If items length less than PAGE_SIZE - that means all items already received
+            const hasMoreItems = (action.posts.length && action.posts.length === PAGE_SIZE) ? true : false;
 
             return { ...state, isFetching: false, errorMessage: '', hasMoreItems, isFirstLoad: false, items: [ ...state.items, ...action.posts ] };
 
@@ -61,13 +65,12 @@ const postReducer = (state = initialState, action) => {
             return { ...state, isFetching: false, errorMessage: action.error };
 
         case 'UPDATING_POST_REQUEST':
-            return { ...state, items: updatePostReducer(state.items, action) };
-
         case 'UPDATING_POST_SUCCESS':
-            return { ...state, items: updatePostReducer(state.items, action) };
-
         case 'UPDATING_POST_FAILURE':
             return { ...state, items: updatePostReducer(state.items, action) };
+
+        case 'ADDING_POST_SUCCESS':
+            return { ...state, items: [ ...state.items, action.post ] };
 
         case 'SET_ACTIVE_POST':
             return { ...state, activeId: action.id };
@@ -83,5 +86,7 @@ const getActiveId = (state) => state.posts.activeId;
 export const selectActivePost = createSelector([getActiveId, getPosts], (id, posts) => {
     return posts.find(post => post._id.$oid === id) || {};
 });
+
+// export const getPost = createSelector([getPosts], ())
 
 export default postReducer;

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import dateFormat from 'dateformat';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { successAddingPost } from '../../actions/posts.actions';
+import promiseFinally from 'promise.prototype.finally';
 import './post.create.container.css';
 
 import dbService from '../../services/db.service';
@@ -7,12 +11,16 @@ import postsService from '../../services/posts.service';
 import NewPost from './new-post/new-post';
 import PostPreview from './new-post-preview/new-post-preview';
 
+// will be a no-op if not needed
+promiseFinally.shim();
+
 class PostCreator extends Component {
     constructor() {
         super();
 
         this.state = {
             labels: [],
+            isAdding: false,
             postModel: {
                 title: 'My first super javascript post',
                 activeLabel: {},
@@ -57,15 +65,22 @@ class PostCreator extends Component {
     createNewPost = (event) => {
         event.preventDefault();
         const { postModel } = this.state;
-
+        const { addPost } = this.props;
         const preparedPost = postsService.prepareNewItem(postModel);
-        
-        dbService.addPost(preparedPost).then(post => {
-            debugger
-        })
-        .catch(error => {
-            debugger
-        })
+
+        this.setState({ isAdding: true });
+
+        promiseFinally(dbService.addPost(preparedPost))
+            .then(post => {
+                addPost(post);
+                this.setState({ isAdding: false });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => {
+                this.setState({ isAdding: false });
+            });
     }
 
     updateCode = (rawCode, options) => {
@@ -90,7 +105,7 @@ class PostCreator extends Component {
     }
 
     render() {
-        const { labels, postModel } = this.state;
+        const { labels, postModel, isAdding } = this.state;
         const now = dateFormat(new Date(), 'mmmm dS, yyyy');
 
         return (
@@ -98,6 +113,7 @@ class PostCreator extends Component {
                 <div className="post-creator-container">
                     <NewPost 
                         labels={labels}
+                        isAdding={isAdding}
                         model={postModel}
                         createNewPost={this.createNewPost}
                         updateCode={this.updateCode}
@@ -109,6 +125,14 @@ class PostCreator extends Component {
             </main>
         )
     }
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: bindActionCreators(successAddingPost, dispatch)
+    }
+};
+
+PostCreator = connect(null, mapDispatchToProps)(PostCreator);
 
 export default PostCreator;

@@ -5,10 +5,17 @@
     background-color: #2b303b;
     color: rgba(255, 255, 255, .9);
     font-size: 15px;
+    line-height: 1.5;
     outline: none;
     border: none;
     cursor: pointer;
     transition: all .2s ease-in-out;
+}
+
+.btn[disabled] {
+    pointer-events: none;
+    cursor: default;
+    opacity: .5;
 }
 
 .btn.btn-apply {
@@ -38,3 +45,4 @@
 .btn-group .btn:last-child {
     margin-right: 0;
 }
+

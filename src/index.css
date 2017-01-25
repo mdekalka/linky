@@ -33,6 +33,12 @@ a:visited {
     color: #c3c3c3;
 }
 
+a.disabled {
+    pointer-events: none;
+    opacity: .5;
+    cursor: default;
+}
+
 ul {
     list-style-type: none;
     padding: 0;

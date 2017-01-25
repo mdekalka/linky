@@ -1,8 +1,8 @@
-import { POSTS } from '../constants/constants';
+import { POSTS_ACTIONS } from '../constants/constants';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
-        LOAD_POST_FAILURE } = POSTS;
+        LOAD_POST_FAILURE } = POSTS_ACTIONS;
 
 // Loading posts
 const requestPosts = (url) => {
@@ -72,6 +72,15 @@ export const updatingPost = (id, data) => (dispatch, getState, postsAPI) => {
             dispatch(rejectUpdatingPost(id, error));
         });
 };
+
+// Adding new post
+export const successAddingPost = (post) => {
+    return {
+        type: 'ADDING_POST_SUCCESS',
+        post
+    }
+};
+
 
 // Set active post
 export const setActivePost = (id) => {

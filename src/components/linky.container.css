@@ -42,6 +42,7 @@
     flex-direction: column;
     flex-shrink: 0;
     overflow-y: auto;
+    background-color: #22262d;
 }
 
 .menu-list {
