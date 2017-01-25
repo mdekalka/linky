@@ -68,6 +68,7 @@
     "react-prism": "^4.0.0",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.1",
+    "react-svg": "^2.1.18",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.0",
     "redux-logger": "^2.7.4",

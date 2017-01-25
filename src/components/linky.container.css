@@ -7,35 +7,6 @@
     background-color: #2b303b;
 }
 
-.search-input {
-    padding: 8px 10px;
-    border-radius: 17px;
-    border: none;
-    outline: none;
-    position: relative;
-    transform: translateX(15px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all .3s ease-in-out;
-}
-
-.search-input.show {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: all;
-}
-
-.header-form {
-    float: right;
-}
-
-.search-icon {
-    line-height: 31px;
-    float: right;
-    margin-left: 20px;
-    cursor: pointer;
-}
-
 .posts-nav-menu {
     width: 500px;
     display: flex;
@@ -53,6 +24,7 @@
     /*overflow-y: auto;*/
 
     /*min-height: 0px;*/
+    /*overflow-y: auto;*/
 }
 
 .main-wrapper {
@@ -76,10 +48,11 @@
 .main-post {
     display: flex;
     align-items: center;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0 ,0, 0);
     position: relative;
     padding: 25px;
     text-align: left;
+    background-color: #22262d;
     transition: background-color .2s ease-in-out;
     cursor: pointer;
 }

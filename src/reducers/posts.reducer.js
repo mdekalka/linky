@@ -82,11 +82,29 @@ const postReducer = (state = initialState, action) => {
 
 const getPosts = (state) => state.posts.items;
 const getActiveId = (state) => state.posts.activeId;
+const getFilters = (state) => state.filters;
+
 
 export const selectActivePost = createSelector([getActiveId, getPosts], (id, posts) => {
     return posts.find(post => post._id.$oid === id) || {};
 });
 
-// export const getPost = createSelector([getPosts], ())
+export const selectPostsByFilters = createSelector([getPosts, getFilters], (posts, filters) => {
+    const query = filters.query.toLowerCase();
+    const { activeLabel, isFavourite } = filters;
+
+    let resultPosts = posts.filter(post => post.title.toLowerCase().includes(query));
+
+    if (activeLabel.name) {
+        resultPosts = resultPosts.filter(post => post.activeLabel.name === activeLabel.name);
+    }
+
+    if (isFavourite) {
+        resultPosts = resultPosts.filter(post => post.isFavourite);
+    }
+
+    return resultPosts;
+});
+
 
 export default postReducer;

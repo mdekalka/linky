@@ -34,7 +34,7 @@ class LabelSelect extends Component {
 
 LabelSelect.defaultProps = {
     list: [],
-    activeItem: null
+    activeItem: {}
 };
 
 export default LabelSelect;

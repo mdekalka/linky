@@ -4,7 +4,6 @@ import './linky.container.css';
 
 import LinkyContent from './posts/posts.container';
 
-
 class LinkyContainer extends Component {
     render() {
         return (

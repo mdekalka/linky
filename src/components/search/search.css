@@ -1,0 +1,14 @@
+.header-search {
+    display: flex;
+    flex-shrink: 0;
+    padding: 25px;
+    align-items: center;
+}
+
+.search-input {
+
+}
+
+.header-search .form-input {
+    width: 100%;
+}

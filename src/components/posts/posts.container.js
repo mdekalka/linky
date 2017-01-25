@@ -5,19 +5,30 @@ import { bindActionCreators } from 'redux';
 import dateFormat from 'dateformat';
 import classNames from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
+import { selectPostsByFilters } from '../../reducers/posts.reducer';
 
+import Search from '../../components/search/search';
+import Tools from '../../components/tools/tools';
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
 import * as postsActions from '../../actions/posts.actions';
+import * as filtersActions from '../../actions/filters.actions';
+import postsService from '../../services/posts.service';
 
 class LinkyContent extends Component {
     constructor(props) {
         super(props);
 
-        const actions = props.postsActions;
+        const posts = props.postsActions;
+        const filters = props.filtersActions;
 
-        this.loadPosts = actions.loadPosts;
-        this.updatingPost = actions.updatingPost;
+        this.loadPosts = posts.loadPosts;
+        this.updatingPost = posts.updatingPost;
+
+        this.resetFilters = filters.resetFilters;
+        this.updateFilters = filters.updateFilters;
+
+        this.state = {};
     }
 
     getPosts = () => {
@@ -36,6 +47,10 @@ class LinkyContent extends Component {
     }
 
     componentDidMount() {
+        const labels = postsService.getLabels();
+
+        this.setState({ labels });
+
         this.getPosts();
     }
 
@@ -43,17 +58,28 @@ class LinkyContent extends Component {
         this.updatingPost(id, isFavourite);
     }
 
-    get isPostsLoaded() {
-        const { posts, isFetching } = this.props;
+    onUpdateFilters = (filters) => {
+        this.updateFilters(filters);
+    }
 
-        return (!!posts.length && !isFetching);
+    resetModel = () => {
+        this.resetFilters();
     }
 
     render() {
-        const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage } = this.props;
+        const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage, filters } = this.props;
+        const { labels } = this.state;
 
         return (
             <div className="posts-nav-menu">
+                <Search 
+                    onUpdateFilters={this.onUpdateFilters}
+                    throttle={300} />
+                <Tools 
+                    labels={labels}
+                    onUpdateFilters={this.onUpdateFilters}
+                    resetModel={this.resetModel}
+                    filters={filters} />
                 {(isFetching && isFirstLoad) && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
                 <InfiniteScroll
                     className="flex"
@@ -82,7 +108,8 @@ class LinkyContent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts.items,
+        filters: state.filters,
+        posts: selectPostsByFilters(state),
         isFetching: state.posts.isFetching,
         isFirstLoad: state.posts.isFirstLoad,
         errorMessage: state.posts.errorMessage,
@@ -92,7 +119,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        postsActions: bindActionCreators(postsActions, dispatch)
+        postsActions: bindActionCreators(postsActions, dispatch),
+        filtersActions: bindActionCreators(filtersActions, dispatch)
     }
 };
 

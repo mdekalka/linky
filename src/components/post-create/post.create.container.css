@@ -1,9 +1,6 @@
 .new-post-container .post-title {
     display: block;
 }
-.new-post-container .loader {
-    margin: 0 15px;
-}
 
 .post-creator-container {
     display: flex;
