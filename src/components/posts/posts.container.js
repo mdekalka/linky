@@ -21,12 +21,18 @@ class LinkyContent extends Component {
     }
 
     getPosts = () => {
-            this.loadPosts().then(() => {
-                // Note: fires after success items received
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        const { isFetching } = this.props;
+
+        if (isFetching) {
+            return;
+        }
+        
+        this.loadPosts().then(() => {
+            // Note: fires after success items received
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
     componentDidMount() {
@@ -44,7 +50,7 @@ class LinkyContent extends Component {
     }
 
     render() {
-        const { posts, isFetching, isFirstLoad, errorMessage } = this.props;
+        const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage } = this.props;
 
         return (
             <div className="posts-nav-menu">
@@ -54,7 +60,7 @@ class LinkyContent extends Component {
                     pageStart={0}
                     loadMore={this.getPosts}
                     initialLoad={false}
-                    hasMore={true}
+                    hasMore={hasMoreItems}
                     loader={!isFirstLoad && <Loader />}
                     useWindow={false}>
                     <ul className="menu-list">
@@ -74,8 +80,8 @@ const mapStateToProps = (state) => {
         posts: state.posts.items,
         isFetching: state.posts.isFetching,
         isFirstLoad: state.posts.isFirstLoad,
-        errorMessage: state.posts.errorMessage
-
+        errorMessage: state.posts.errorMessage,
+        hasMoreItems: state.posts.hasMoreItems
     }
 };
 
