@@ -84,7 +84,12 @@ const getPosts = (state) => state.posts.items;
 const getActiveId = (state) => state.posts.activeId;
 const getFilters = (state) => state.filters;
 
+const filterByQuery = (query) => (post) => post.title.toLowerCase().includes(query);
+const filterByName = (posts, name) => posts.filter(post => post.activeLabel.name === name);
+const filterByFavourite = (posts, isFavourite) => posts.filter(post => post.isFavourite);
 
+
+// Global selectors:
 export const selectActivePost = createSelector([getActiveId, getPosts], (id, posts) => {
     return posts.find(post => post._id.$oid === id) || {};
 });
@@ -93,14 +98,14 @@ export const selectPostsByFilters = createSelector([getPosts, getFilters], (post
     const query = filters.query.toLowerCase();
     const { activeLabel, isFavourite } = filters;
 
-    let resultPosts = posts.filter(post => post.title.toLowerCase().includes(query));
+    let resultPosts = posts.filter(filterByQuery(query));
 
     if (activeLabel.name) {
-        resultPosts = resultPosts.filter(post => post.activeLabel.name === activeLabel.name);
+        resultPosts = filterByName(resultPosts, activeLabel.name)
     }
 
     if (isFavourite) {
-        resultPosts = resultPosts.filter(post => post.isFavourite);
+        resultPosts = filterByFavourite(resultPosts, isFavourite);
     }
 
     return resultPosts;

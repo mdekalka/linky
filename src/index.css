@@ -26,11 +26,8 @@ a,
 a:active,
 a:focus,
 a:hover {
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-}
-
-a:visited {
-    color: #c3c3c3;
 }
 
 a.disabled {

@@ -1,0 +1,27 @@
+.about-list {
+    position: relative;
+    margin: 10px 0;
+}
+
+.about-list-item {
+    padding-left: 13px;
+    font-size: 14px;
+    color: rgb(154, 151, 151);
+}
+
+.about-list-item::after {
+    position: absolute;
+    left: 0px;
+    content: '\00bb';
+    display: inline-block;
+    color: #89b025;
+}
+
+.about-list-link {
+    margin-right: 5px;
+    color: #89b025;
+}
+
+.about-list-link:hover {
+    color: #7db025;
+}
