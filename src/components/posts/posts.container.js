@@ -140,7 +140,7 @@ const LinkyPost = ({ post, toggleFavourite }) => {
                 <div className={`main-post ${post.activeLabel.name}`}>
                     <div className="post-image"><img className="image" src={post.activeLabel.image} alt={post.title} /></div>
                     <div className="post-content">
-                        <div>
+                        <div className="post-body">
                             <h5 className="post-title">{post.title}</h5>
                             {/* Note: How to avoid this conditional statement for better readability?
                                 TODO: Find a better solution for this boilerplate conditions */}

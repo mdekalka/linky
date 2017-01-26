@@ -104,6 +104,10 @@
     overflow: hidden;
 }
 
+.post-content .post-title {
+    margin-bottom: 5px;
+}
+
 .post-favourite {
     margin-left: 10px;
     cursor: pointer;
@@ -122,7 +126,6 @@
     display: inline-block;
     font-size: 16px;
     color: #89b025;
-    margin-bottom: 5px;
 }
 
 .post-title + .loader {
@@ -147,11 +150,4 @@
 
 .post-tags .post-tag {
     margin-right: 5px;
-}
-
-.post-time {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 12px;
-    color: #9a9797;
 }

@@ -22,6 +22,10 @@
     background-color: #658021;
 }
 
+.btn.btn-action {
+    background-color: #94872f;
+}
+
 .btn.btn-cancel {
     background-color: #7b051f;
 }
@@ -32,6 +36,10 @@
 
 .btn.btn-apply:hover {
     background-color: #89b025;
+}
+
+.btn.btn-action:hover {
+    background-color: #c5b335;
 }
 
 .btn.btn-cancel:hover {

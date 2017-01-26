@@ -5,14 +5,14 @@ const instance = axios.create({
 });
 
 const config = {
-    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts?',
-    api: '&apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
+    baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts',
+    api: 'apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
     page: 0,
     pageSize: 10
 };
 
-const createUrl = (param = '') => {
-    return `${config.baseURl}/${param}${config.api}`;
+const createUrl = (id = '', params = '') => {
+    return `${config.baseURl}/${id}?${params}${config.api}`;
 };
 
 const errorHandler = (err) => {
@@ -27,7 +27,7 @@ const successHandler = (response) => {
 
 const dbService = {
     getPosts() {
-        const url = createUrl(`&sk=${config.page}&l=${config.pageSize}`);
+        const url = createUrl('', `&sk=${config.page}&l=${config.pageSize}&`);
 
         return instance({
             method: 'GET',
@@ -58,6 +58,17 @@ const dbService = {
               method: 'POST',
               url,
               data: post
+        })
+        .then(successHandler)
+        .catch(errorHandler);
+    },
+
+    deletePost(id) {
+        const url = createUrl(id);
+
+        return instance({
+              method: 'DELETE',
+              url
         })
         .then(successHandler)
         .catch(errorHandler);

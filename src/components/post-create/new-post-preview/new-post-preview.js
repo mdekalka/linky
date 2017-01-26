@@ -1,12 +1,10 @@
 import React from 'react';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
-import _ from 'lodash';
 
 import './new-post-preview.css';
 
 const PostPreview = ({ title, time, isFavourite, activeLabel, tags, code }) => {
-
     return (
         <div className="post-preview flex-column">
             <div>
@@ -22,9 +20,11 @@ const PostPreview = ({ title, time, isFavourite, activeLabel, tags, code }) => {
                 </div>
             }
             <time className="post-time">{time}</time>
-            <PrismCode className="code-preview language-javascript">
+            {!!code.length &&
+                <PrismCode className="code-preview language-javascript">
                 {code}
-            </PrismCode>
+                </PrismCode>
+            }
         </div>
     )
 };

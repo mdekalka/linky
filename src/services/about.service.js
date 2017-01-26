@@ -86,6 +86,12 @@ const aboutLinks = [{
         ref: 'https://www.npmjs.com/package/cuid',
         name: 'Collision-resistant ids optimized for horizontal scaling and performance',
         link: 'cuid'
+    },
+    {
+        id: 16,
+        ref: 'https://www.npmjs.com/package/keymirror',
+        name: 'A simple utility for creating an object with values equal to its keys',
+        link: 'keymirror'
 }];
 
 const l2pLinks = [{
@@ -102,15 +108,21 @@ const l2pLinks = [{
     },
     {
         id: 3,
-        ref: 'https://www.npmjs.com/package/redux-actions',
-        name: 'Flux Standard Action utlities for Redux',
-        link: 'redux-actions'
-    },
-    {
-        id: 4,
         ref: 'https://www.npmjs.com/package/recompose',
         name: 'A React utility belt for function components and higher-order components',
         link: 'recompose'
+    },
+    {
+        id: 4,
+        ref: 'https://www.npmjs.com/package/redux-saga',
+        name: 'Saga middleware for Redux to handle Side Effects',
+        link: 'redux-saga'
+    },
+    {
+        id: 5,
+        ref: 'https://www.npmjs.com/package/redux-actions',
+        name: 'Flux Standard Action utlities for Redux',
+        link: 'redux-actions'
 }];
 
 const aboutService = {

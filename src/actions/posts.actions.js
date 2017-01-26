@@ -65,13 +65,50 @@ export const updatingPost = (id, data) => (dispatch, getState, postsAPI) => {
     dispatch(requestUpdatingPost(id));
 
     return postsAPI.updatePost(id, data)
-        .then(updatedPost => {
+        .then(() => {
             dispatch(successUpdatingPost(id, data));
         })
         .catch(error => {
             dispatch(rejectUpdatingPost(id, error));
         });
 };
+
+// Deleting post
+const requestDeletingPost = (id) => {
+    return {
+        type: 'DELETING_POST_REQUEST',
+        id
+    }
+};
+
+const successDeletingPost = (id) => {
+    return {
+        type: 'DELETING_POST_SUCCESS',
+        id
+    }
+};
+
+const rejectDeletingPost = (id, error) => {
+    return {
+        type: 'DELETING_POST_FAILURE',
+        id,
+        error
+    }
+};
+
+export const deletingPost = (id) => (dispatch, getState, postsAPI) => {
+    dispatch(requestDeletingPost(id));
+
+    return postsAPI.deletePost(id)
+        .then(id => {
+            debugger
+            dispatch(successDeletingPost(id));
+        })
+        .catch(error => {
+            dispatch(rejectDeletingPost(id, error));
+        });
+};
+
 
 // Adding new post
 export const successAddingPost = (post) => {

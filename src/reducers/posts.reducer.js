@@ -49,6 +49,20 @@ const updatePostReducer = (state, action) => {
     }
 };
 
+const deletePostReducer = (state, action) => {
+    switch (action.type) {
+        case 'DELETING_POST_SUCCESS':
+            return state.filter(post => {
+                if (post._id.$oid !== action.id) {
+                    return post;
+                }
+            });
+        
+        default:
+            return state;
+    }
+};
+
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_POST_REQUEST:
@@ -65,9 +79,14 @@ const postReducer = (state = initialState, action) => {
             return { ...state, isFetching: false, errorMessage: action.error };
 
         case 'UPDATING_POST_REQUEST':
+        case 'DELETING_POST_REQUEST':
         case 'UPDATING_POST_SUCCESS':
         case 'UPDATING_POST_FAILURE':
+        case 'DELETING_POST_FAILURE':
             return { ...state, items: updatePostReducer(state.items, action) };
+
+        case 'DELETING_POST_SUCCESS':
+            return { ...state, items: deletePostReducer(state.items, action) };
 
         case 'ADDING_POST_SUCCESS':
             return { ...state, items: [ ...state.items, action.post ] };

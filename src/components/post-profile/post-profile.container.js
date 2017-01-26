@@ -7,8 +7,7 @@ import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
 
 import Loader from '../loader/loader.component';
-import { setActivePost } from '../../actions/posts.actions';
-import { updatingPost } from '../../actions/posts.actions';
+import * as postActions from '../../actions/posts.actions';
 import { selectActivePost } from '../../reducers/posts.reducer';
 
 class PostProfile extends Component {
@@ -19,6 +18,7 @@ class PostProfile extends Component {
 
         this.setActivePost = actions.setActivePost;
         this.updatingPost = actions.updatingPost;
+        this.deletingPost = actions.deletingPost;
     };
 
     componentDidMount() {
@@ -39,29 +39,48 @@ class PostProfile extends Component {
         this.updatingPost(id, isFavourite);
     }
 
+    deletePost = (id) => {
+        debugger
+        this.deletingPost(id);
+    }
+
+    updatePost = (id) => {
+
+    }
+
     renderPost(post) {
         if (!_.isEmpty(post)) {
             const { _id: { $oid: id }, isFetching } = post;
 
             return (
                 <div className="post-profile">
-                    <div>
-                        <h5 className="post-title">{post.title}</h5>
-                        {!isFetching &&
-                            <span onClick={() => this.toggleFavourite(id, {isFavourite: !post.isFavourite})} className="post-favourite">
-                                <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
-                            </span>
-                        }
-                        {isFetching && <Loader size="small" />}
+                    <div className="post-header">
+                        <div className="post-header-info">
+                            <div className="post-image">
+                                <img className="image" src={post.activeLabel.image} alt={post.activeLabel.name} />
+                            </div>
+                            <h5 className="post-title">{post.title}</h5>
+                            {!isFetching &&
+                                <span onClick={() => this.toggleFavourite(id, {isFavourite: !post.isFavourite})} className="post-favourite">
+                                    <i className={classNames('fa fa-star', {'active': post.isFavourite})} aria-hidden="true"></i>
+                                </span>
+                            }
+                            {isFetching && <Loader size="small" />}
+                        </div>
+                        <div className="post-header-tools">
+                            <div className="btn-group">
+                                <button onClick={() => this.updatePost(id)} className="btn btn-action">Edit</button>
+                                <button onClick={() => this.deletePost(id)} className="btn btn-cancel">Delete</button>
+                            </div>
+                        </div>
                     </div>
                     {!!post.tags.length &&
                         <div className="post-tags">
                             [{post.tags.map((tag, idx) => <span className="post-tag" key={idx}>{tag}</span>)}]
                         </div>
                     }
-                    <PrismCode className="language-javascript">
-                        {post.code}
-                    </PrismCode>
+                    
+                    <PrismCode className="language-javascript">{post.code}</PrismCode>
                 </div>
             )
         } else {
@@ -88,7 +107,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        postsActions: bindActionCreators({ setActivePost, updatingPost }, dispatch)
+        postsActions: bindActionCreators(postActions, dispatch)
     }
 };
 
