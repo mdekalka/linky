@@ -1,0 +1,19 @@
+.tools-container {
+    padding: 15px 0;
+}
+
+.tools-container .btn {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tools-container .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.tools-container .form-group {
+    margin: 0 10px;
+}

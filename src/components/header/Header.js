@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import './header.css';
+
+import Search from '../../components/search/Search';
+import HeaderMenu from './header-menu/HeaderMenu';
+import headerService from '../../services/header.service';
+
+class Header extends Component {
+    componentWillMount() {
+        this.menu = headerService.getHeaderMenu();
+    }
+
+    render() {
+        return (
+            <header className="main-header">
+                <nav className="main-nav container">
+                    <HeaderMenu list={this.menu} />
+                    <Search />
+                </nav>
+            </header>
+        )
+    }
+};
+
+export default Header;

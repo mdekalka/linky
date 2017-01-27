@@ -7,9 +7,9 @@ import LinkyContent from './posts/posts.container';
 class LinkyContainer extends Component {
     render() {
         return (
-            <main className="main">
+            <main className="main row">
                 <LinkyContent />
-                <div className="main-wrapper">{this.props.children}</div>
+                <div className="main-wrapper one-half column">{this.props.children}</div>
             </main>
         )
     }

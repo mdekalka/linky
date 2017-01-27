@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import LinkyHeader from './components/header/header.container';
+import Header from './components/header/Header';
+import ToolsMenu from './components/tools/ToolsMenu';
 
 class App extends Component {
     render() {
         return (
             <div className="pagewrapper">
-                <LinkyHeader />
+                <Header />
+                <ToolsMenu />
                 {this.props.children}
             </div>
         );

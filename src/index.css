@@ -26,7 +26,7 @@ a,
 a:active,
 a:focus,
 a:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
     text-decoration: none;
 }
 
@@ -51,20 +51,15 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
 }
 
-.flex {
-    display: flex;
-    flex-direction: column;
-}
-
 .flex-center {
     display: flex;
+    height: 100%;
     flex: auto;
     justify-content: center;
     align-items: center;
 }
 
 #root {
-    overflow: hidden;
     height: 100%;
 }
 

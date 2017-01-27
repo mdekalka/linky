@@ -8,6 +8,13 @@ class LabelSelect extends Component {
         super(props);
 
         this.onSelect = props.onSelect;
+        this.activeItem = props.activeItem;
+    }
+
+    select = (item) => {
+        const param = this.activeItem.id === item.id ? {} : item;
+
+        this.onSelect(param);
     }
 
     render() {
@@ -19,14 +26,13 @@ class LabelSelect extends Component {
                     {list.map(listItem => {
                         return (
                             <li className={classNames('label-select-item', {'selected': listItem.id === activeItem.id})}
-                                onClick={() => this.onSelect(listItem)}
+                                onClick={() => this.select(listItem)}
                                 key={listItem.id}>
                                 <img className="label-select-image" src={listItem.image} alt={listItem.name} />
                             </li>
                         )
                     })}
                 </ul>
-                {!!list.length && <span className="label-select-active">{activeItem.name}</span>}
             </div>
         )
     }

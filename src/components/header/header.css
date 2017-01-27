@@ -1,27 +1,15 @@
 .main-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-shrink: 0;
     background-color: #2b303b;
-    padding: 0 25px;
 }
 
-.header-list-item {
-    display: inline-block;
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-.header-list-link {
-    display: block;
-    padding: 25px;
-    transition: background-color .2s cubic-bezier(0.23, 1, 0.320, 1);
+.main-nav .header-list {
+    margin-right: 55px;
 }
 
-.header-list-link.active {
-    background-color: #000;
-}
-
-.header-list-link:hover {
-    background-color: #000;
-}
 

@@ -1,27 +1,29 @@
 .posts-nav-menu {
-    width: 500px;
+    /*width: 50%;
+    flex: 1 0 auto;
     display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
+    flex-direction: column;*/
+    /*background-color: #22262d;*/
+}
+
+.menu-list-scroll {
+    /*display: flex;
+    flex: 1 1 auto;
     overflow-y: auto;
-    background-color: #22262d;
+    flex-direction: column;*/
 }
 
 .menu-list {
     /*display: flex;
+    flex: 1 0 auto;
     flex-direction: column;*/
-    /*flex: 1 1 auto;*/
-    /* Note: actual property */
-    /*overflow-y: auto;*/
-
-    /*min-height: 0px;*/
     /*overflow-y: auto;*/
 }
 
 .main-wrapper {
-    display: flex;
-    flex: 1 1 auto;
-    overflow-y: auto;
+    /*display: flex;
+    width: 50%;
+    flex: 1 0 auto;*/
 }
 
 .main-post-route {

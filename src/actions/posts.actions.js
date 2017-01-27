@@ -1,4 +1,6 @@
 import { POSTS_ACTIONS } from '../constants/constants';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import postsAPI from '../services/posts.service';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
@@ -36,6 +38,15 @@ export const loadPosts = () => (dispatch, getState, postsAPI) => {
             dispatch(rejectPosts(error));
         });
 };
+
+// export function* loadPostsSaga() {
+//     try {
+//         const posts = yield call(postsAPI.getPosts());
+//         yield put(receivePosts(posts));
+//     } catch (error) {
+//         yield put (rejectPosts(error));
+//     }
+// }
 
 // Toggling favourites
 const requestUpdatingPost = (id) => {
@@ -81,10 +92,10 @@ const requestDeletingPost = (id) => {
     }
 };
 
-const successDeletingPost = (id) => {
+const successDeletingPost = (post) => {
     return {
         type: 'DELETING_POST_SUCCESS',
-        id
+        id: post._id.$oid
     }
 };
 
@@ -101,7 +112,6 @@ export const deletingPost = (id) => (dispatch, getState, postsAPI) => {
 
     return postsAPI.deletePost(id)
         .then(id => {
-            debugger
             dispatch(successDeletingPost(id));
         })
         .catch(error => {

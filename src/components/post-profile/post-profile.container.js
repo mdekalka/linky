@@ -40,8 +40,15 @@ class PostProfile extends Component {
     }
 
     deletePost = (id) => {
-        debugger
-        this.deletingPost(id);
+        this.deletingPost(id).then(() => {
+            this.redirectTo('/');
+        });
+    }
+
+    redirectTo(path) {
+        if (path) {
+            this.props.router.push(path);
+        }
     }
 
     updatePost = (id) => {
@@ -89,11 +96,14 @@ class PostProfile extends Component {
     }
 
     render() {
-        const { activePost } = this.props;
+        const { activePost, params } = this.props;
 
         return (
             <div className="post-profile-container">
                 {this.renderPost(activePost)}
+                {(!activePost.isFetching && _.isEmpty(activePost)) &&
+                    <div className="flex-center">Post with ID: {params.id} does not exists</div>
+                }
             </div>
         )
     }

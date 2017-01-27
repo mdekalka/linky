@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { browserHistory } from 'react-router';
 require('codemirror/mode/javascript/javascript');
 
 import Loader from '../../../components/loader/loader.component';
@@ -47,7 +48,7 @@ class NewPost extends Component {
                     </div>
                     <div className="btn-group">
                         <button disabled={isAdding} className="btn btn-apply">Create</button>
-                        <Link to="/" className={classNames('btn btn-primary', {'disabled': isAdding})} >Return to</Link>
+                        <Link onClick={browserHistory.goBack} className={classNames('btn btn-primary', {'disabled': isAdding})} >Return</Link>
                         {isAdding && <Loader />}
                     </div>
                 </form>

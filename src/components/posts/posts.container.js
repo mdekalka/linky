@@ -7,8 +7,7 @@ import classNames from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { selectPostsByFilters } from '../../reducers/posts.reducer';
 
-import Search from '../../components/search/search';
-import Tools from '../../components/tools/tools';
+import Search from '../../components/search/Search';
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
 import * as postsActions from '../../actions/posts.actions';
@@ -71,30 +70,23 @@ class LinkyContent extends Component {
         const { labels } = this.state;
 
         return (
-            <div className="posts-nav-menu">
-                <Search 
-                    onUpdateFilters={this.onUpdateFilters}
-                    throttle={300} />
-                <Tools 
-                    labels={labels}
-                    onUpdateFilters={this.onUpdateFilters}
-                    resetModel={this.resetModel}
-                    filters={filters} />
+            <div className="posts-nav-menu one-half column">
                 {(isFetching && isFirstLoad) && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
-                <InfiniteScroll
-                    className="flex"
-                    pageStart={0}
-                    loadMore={this.getPosts}
-                    initialLoad={false}
-                    hasMore={hasMoreItems}
-                    loader={!isFirstLoad && <Loader />}
-                    useWindow={false}>
-                    <ul className="menu-list">
-                        {posts.map(post => {
-                            return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
-                        })}
-                    </ul>
-                </InfiniteScroll>
+                <div className="menu-list-scroll">
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={this.getPosts}
+                        initialLoad={false}
+                        hasMore={hasMoreItems}
+                        loader={!isFirstLoad && <div className="flex-center"><Loader /></div>}
+                        useWindow={false}>
+                        <ul className="menu-list row">
+                            {posts.map(post => {
+                                return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
+                            })}
+                        </ul>
+                    </InfiniteScroll>
+                </div>
                 {(errorMessage && !isFetching) &&
                     <div className="flex-center">
                         <ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} />
@@ -135,7 +127,7 @@ const LinkyPost = ({ post, toggleFavourite }) => {
     let { _id: { $oid: id }, isFetching } = post;
 
     return (
-        <li>
+        <li className="one-third column">
             <Link className="main-post-route" to={`/post/${id}`} activeClassName="active">
                 <div className={`main-post ${post.activeLabel.name}`}>
                     <div className="post-image"><img className="image" src={post.activeLabel.image} alt={post.title} /></div>

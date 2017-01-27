@@ -52,6 +52,7 @@ const updatePostReducer = (state, action) => {
 const deletePostReducer = (state, action) => {
     switch (action.type) {
         case 'DELETING_POST_SUCCESS':
+        debugger
             return state.filter(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
