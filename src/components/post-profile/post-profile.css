@@ -1,11 +1,19 @@
 .post-profile-container {
     width: 100%;
+    height: 100%;
 }
 
 .post-profile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: 0 25px;
     text-align: left;
     color: #89b025;
+}
+
+.language-javascript {
+    overflow-y: auto;
 }
 
 .post-profile .post-title {
@@ -27,6 +35,7 @@
 
 .post-header {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: space-between;
 }

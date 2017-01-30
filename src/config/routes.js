@@ -21,6 +21,7 @@ const routes = (
                     <Route path="/post/:id" component={PostProfile} />
                 </Route>
                 <Route path="/post-create" component={PostCreator} />
+                <Route path="/post-update/:id" isEditMode={true} component={PostCreator} />
                 <Route path="/about" component={About} />
                 <Route path="*" component={NotFound} />
             </Route>

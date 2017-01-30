@@ -2,7 +2,7 @@ import React from 'react';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
 
-import './new-post-preview.css';
+import './post-preview.css';
 
 const PostPreview = ({ title, time, isFavourite, activeLabel, tags, code }) => {
     return (

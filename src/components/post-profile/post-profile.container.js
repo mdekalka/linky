@@ -52,7 +52,7 @@ class PostProfile extends Component {
     }
 
     updatePost = (id) => {
-
+        this.redirectTo(`/post-update/${id}`);
     }
 
     renderPost(post) {

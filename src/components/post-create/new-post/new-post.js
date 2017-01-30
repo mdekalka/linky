@@ -20,7 +20,7 @@ class NewPost extends Component {
     }
 
     render() {
-        const { labels, model, isAdding, setActiveItem, onTagsUpdate, onModelUpdate, updateCode, createNewPost } = this.props;
+        const { labels, model, isAdding, setActiveItem, onTagsUpdate, onModelUpdate, updateCode, editMode, createNewPost } = this.props;
         const options = this.options;
 
         return (
@@ -47,7 +47,8 @@ class NewPost extends Component {
                         <CodeMirror value={model.code} onChange={updateCode} options={options} />
                     </div>
                     <div className="btn-group">
-                        <button disabled={isAdding} className="btn btn-apply">Create</button>
+                        {!editMode && <button disabled={isAdding} type="submit" className="btn btn-apply">Create</button>}
+                        {editMode && <button disabled={isAdding} type="submit" className="btn btn-apply">Update</button>}
                         <Link onClick={browserHistory.goBack} className={classNames('btn btn-primary', {'disabled': isAdding})} >Return</Link>
                         {isAdding && <Loader />}
                     </div>
