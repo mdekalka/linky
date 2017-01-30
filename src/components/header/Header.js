@@ -13,9 +13,9 @@ class Header extends Component {
     render() {
         return (
             <header className="main-header">
-                <nav className="main-nav container">
-                    <HeaderMenu list={this.menu} />
+                <nav className="main-nav">
                     <Search />
+                    <HeaderMenu list={this.menu} />
                 </nav>
             </header>
         )

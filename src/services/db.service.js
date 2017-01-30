@@ -8,7 +8,7 @@ const config = {
     baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts',
     api: 'apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
     page: 0,
-    pageSize: 10
+    pageSize: 20
 };
 
 const createUrl = (id = '', params = '') => {

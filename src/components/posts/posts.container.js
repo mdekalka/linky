@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import InfiniteScroll from 'react-infinite-scroller';
 import { selectPostsByFilters } from '../../reducers/posts.reducer';
 
+import ToolsMenu from '../../components/tools/ToolsMenu';
 import Search from '../../components/search/Search';
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
@@ -65,12 +66,17 @@ class LinkyContent extends Component {
         this.resetFilters();
     }
 
+    renderInGrid(posts) {
+        return posts.map((post) => <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />);
+    }
+
     render() {
         const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage, filters } = this.props;
         const { labels } = this.state;
 
         return (
             <div className="posts-nav-menu one-half column">
+                <ToolsMenu />
                 {(isFetching && isFirstLoad) && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
                 <div className="menu-list-scroll">
                     <InfiniteScroll
@@ -80,10 +86,8 @@ class LinkyContent extends Component {
                         hasMore={hasMoreItems}
                         loader={!isFirstLoad && <div className="flex-center"><Loader /></div>}
                         useWindow={false}>
-                        <ul className="menu-list row">
-                            {posts.map(post => {
-                                return <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />
-                            })}
+                        <ul className="menu-list">
+                            {this.renderInGrid(posts)}
                         </ul>
                     </InfiniteScroll>
                 </div>
@@ -127,7 +131,7 @@ const LinkyPost = ({ post, toggleFavourite }) => {
     let { _id: { $oid: id }, isFetching } = post;
 
     return (
-        <li className="one-third column">
+        <li className="main-post-link">
             <Link className="main-post-route" to={`/post/${id}`} activeClassName="active">
                 <div className={`main-post ${post.activeLabel.name}`}>
                     <div className="post-image"><img className="image" src={post.activeLabel.image} alt={post.title} /></div>

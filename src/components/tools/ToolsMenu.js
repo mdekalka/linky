@@ -42,19 +42,17 @@ class ToolsMenu extends Component {
 
         return (
             <div className="tools-container">
-                <div className="container">
-                    <div className="form">
-                        <div className="form-group">
-                            <label className="form-label">
-                                <input type="checkbox" checked={filters.isFavourite} onChange={(event) => this.updateFilters({isFavourite: event.target.checked })} />
-                                <span>Favourite post</span>
-                            </label>
-                        </div>
-                        <div className="form-group">
-                            <LabelSelect list={labels} onSelect={this.onLabelUpdate} activeItem={filters.activeLabel} />
-                        </div>
-                        <button onClick={this.resetFilters} className="btn">Reset</button>
+                <div className="form">
+                    <div className="form-group">
+                        <label className="form-label">
+                            <input type="checkbox" checked={filters.isFavourite} onChange={(event) => this.updateFilters({isFavourite: event.target.checked })} />
+                            <span>Favourite post</span>
+                        </label>
                     </div>
+                    <div className="form-group">
+                        <LabelSelect list={labels} onSelect={this.onLabelUpdate} activeItem={filters.activeLabel} />
+                    </div>
+                    <button onClick={this.resetFilters} className="btn">Reset</button>
                 </div>
             </div>
         )

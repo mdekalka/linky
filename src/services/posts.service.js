@@ -32,7 +32,6 @@ const postsService = {
 
     prepareNewItem(config) {
         const defaultConfig = {
-            // isFavourite: false,
             date: utilsService.getCurrentTime(),
             tags: config.tags.filter(tag => !! tag)
         };

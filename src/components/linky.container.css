@@ -1,29 +1,20 @@
-.posts-nav-menu {
-    /*width: 50%;
-    flex: 1 0 auto;
+.main-wrapper {
     display: flex;
-    flex-direction: column;*/
-    /*background-color: #22262d;*/
 }
 
 .menu-list-scroll {
-    /*display: flex;
-    flex: 1 1 auto;
     overflow-y: auto;
-    flex-direction: column;*/
 }
 
-.menu-list {
-    /*display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;*/
-    /*overflow-y: auto;*/
+.posts-nav-menu {
+    display: flex;
+    flex-direction: column;
 }
 
-.main-wrapper {
-    /*display: flex;
-    width: 50%;
-    flex: 1 0 auto;*/
+.main-post-link {
+    display: inline-block;
+    vertical-align: top;
+    width: 33.333333%;
 }
 
 .main-post-route {

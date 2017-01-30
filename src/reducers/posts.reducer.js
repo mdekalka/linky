@@ -1,6 +1,6 @@
 import { POSTS_ACTIONS } from '../constants/constants';
 import { POSTS } from '../constants/constants';
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
@@ -102,7 +102,7 @@ const postReducer = (state = initialState, action) => {
 
 const getPosts = (state) => state.posts.items;
 const getActiveId = (state) => state.posts.activeId;
-const getFilters = (state) => state.filters;
+const getFilters = (state, grid) => state.filters;
 
 const filterByQuery = (query) => (post) => post.title.toLowerCase().includes(query);
 const filterByName = (posts, name) => posts.filter(post => post.activeLabel.name === name);

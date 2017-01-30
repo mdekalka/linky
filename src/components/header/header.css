@@ -1,11 +1,12 @@
 .main-header {
     background-color: #2b303b;
+    padding: 5px 25px;
 }
 
 .main-nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .main-nav .header-list {
