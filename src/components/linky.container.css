@@ -11,12 +11,6 @@
     flex-direction: column;
 }
 
-.main-post-link {
-    display: inline-block;
-    vertical-align: top;
-    width: 33.333333%;
-}
-
 .main-post-route {
     display: block;
 }

@@ -74,6 +74,7 @@ class PostCreator extends Component {
             .then(post => {
                 addPost(post);
                 this.setState({ isLoading: false });
+                this.props.router.push('/');
             })
             .catch(error => {
                 console.log(error);
