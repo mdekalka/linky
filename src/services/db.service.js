@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { POSTS } from '../constants/constants';
+
+const { PAGE_SIZE } = POSTS;
 
 const instance = axios.create({
     headers: { 'Content-Type': 'application/json' }
@@ -7,8 +10,7 @@ const instance = axios.create({
 const config = {
     baseURl: 'https://api.mlab.com/api/1/databases/piupiupiu/collections/posts',
     api: 'apiKey=rHh_cnP2cfcfQSDz_LEqwP6G0YV2MyHC',
-    page: 0,
-    pageSize: 20
+    page: 0
 };
 
 const createUrl = (id = '', params = '') => {
@@ -19,21 +21,20 @@ const errorHandler = (err) => {
     throw new Error(err);
 };
 
-const successHandler = (response) => {
-    config.page += config.pageSize;
-
-    return response.data;
-};
+const successHandler = (response) => response.data;
 
 const dbService = {
     getPosts() {
-        const url = createUrl('', `&sk=${config.page}&l=${config.pageSize}&`);
+        const url = createUrl('', `&sk=${config.page}&l=${PAGE_SIZE}&`);
 
         return instance({
             method: 'GET',
             url
         })
-        .then(successHandler)
+        .then(response => {
+            config.page += PAGE_SIZE;
+            return successHandler(response);
+        })
         .catch(errorHandler);
     },
 

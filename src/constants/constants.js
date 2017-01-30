@@ -8,5 +8,5 @@ export const POSTS_ACTIONS = keyMirror({
 });
 
 export const POSTS = {
-    PAGE_SIZE: 10
+    PAGE_SIZE: 25
 };

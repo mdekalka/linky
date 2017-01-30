@@ -8,7 +8,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { selectPostsByFilters } from '../../reducers/posts.reducer';
 
 import ToolsMenu from '../../components/tools/ToolsMenu';
-import Search from '../../components/search/Search';
 import Loader from '../../components/loader/loader.component';
 import ErrorMessage from '../../components/error/error.component';
 import * as postsActions from '../../actions/posts.actions';
@@ -50,8 +49,6 @@ class LinkyContent extends Component {
         const labels = postsService.getLabels();
 
         this.setState({ labels });
-
-        this.getPosts();
     }
 
     toggleFavourite = (id, isFavourite) => {
@@ -66,13 +63,8 @@ class LinkyContent extends Component {
         this.resetFilters();
     }
 
-    renderInGrid(posts) {
-        return posts.map((post) => <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />);
-    }
-
     render() {
-        const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage, filters } = this.props;
-        const { labels } = this.state;
+        const { posts, isFetching, isFirstLoad, hasMoreItems, errorMessage } = this.props;
 
         return (
             <div className="posts-nav-menu one-half column">
@@ -82,12 +74,12 @@ class LinkyContent extends Component {
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.getPosts}
-                        initialLoad={false}
+                        initialLoad={true}
                         hasMore={hasMoreItems}
                         loader={!isFirstLoad && <div className="flex-center"><Loader /></div>}
                         useWindow={false}>
                         <ul className="menu-list">
-                            {this.renderInGrid(posts)}
+                            {posts.map((post) => <LinkyPost post={post} toggleFavourite={this.toggleFavourite} key={post._id.$oid} />)}
                         </ul>
                     </InfiniteScroll>
                 </div>

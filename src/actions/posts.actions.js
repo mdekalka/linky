@@ -25,7 +25,7 @@ const rejectPosts = (error) => {
         type: LOAD_POST_FAILURE,
         error
     }
-}
+};
 
 export const loadPosts = () => (dispatch, getState, postsAPI) => {
     dispatch(requestPosts());

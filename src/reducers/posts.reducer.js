@@ -52,7 +52,6 @@ const updatePostReducer = (state, action) => {
 const deletePostReducer = (state, action) => {
     switch (action.type) {
         case 'DELETING_POST_SUCCESS':
-        debugger
             return state.filter(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
@@ -64,6 +63,10 @@ const deletePostReducer = (state, action) => {
     }
 };
 
+const isLoadMore = (posts) => {
+    return (posts.length && posts.length === PAGE_SIZE) ? true : false;
+}
+
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_POST_REQUEST:
@@ -72,7 +75,7 @@ const postReducer = (state = initialState, action) => {
         case LOAD_POST_SUCCESS:
             // Note: mlab does not provide total property in query request(only in separate request)
             // If items length less than PAGE_SIZE - that means all items already received
-            const hasMoreItems = (action.posts.length && action.posts.length === PAGE_SIZE) ? true : false;
+            const hasMoreItems = isLoadMore(action.posts);
 
             return { ...state, isFetching: false, errorMessage: '', hasMoreItems, isFirstLoad: false, items: [ ...state.items, ...action.posts ] };
 

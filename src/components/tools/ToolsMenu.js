@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import './tools-menu.css';
-import menuIcon from '../../assets/icons/hamburger.svg';
-import ReactSVG from 'react-svg';
+import Search from '../../components/search/Search';
 import LabelSelect from '../../components/label-select/label-select.container';
 import * as filtersActions from '../../actions/filters.actions';
 import postsService from '../../services/posts.service';
@@ -43,6 +42,7 @@ class ToolsMenu extends Component {
         return (
             <div className="tools-container">
                 <div className="form">
+                   <Search onChange={this.updateFilters} ms={300} />
                     <div className="form-group">
                         <label className="form-label">
                             <input type="checkbox" checked={filters.isFavourite} onChange={(event) => this.updateFilters({isFavourite: event.target.checked })} />
