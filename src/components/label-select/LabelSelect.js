@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import './label-select.container.css';
+import './label-select.css';
 
 class LabelSelect extends Component {
     constructor(props) {

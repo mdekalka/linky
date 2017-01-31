@@ -1,10 +1,17 @@
 import { POSTS_ACTIONS } from '../constants/constants';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import postsAPI from '../services/posts.service';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
-        LOAD_POST_FAILURE } = POSTS_ACTIONS;
+        LOAD_POST_FAILURE,
+        UPDATING_POST_REQUEST,
+        UPDATING_POST_SUCCESS,
+        UPDATING_POST_FAILURE,
+        DELETING_POST_REQUEST,
+        DELETING_POST_SUCCESS,
+        DELETING_POST_FAILURE,
+        ADDING_POST_SUCCESS,
+        SET_ACTIVE_POST } = POSTS_ACTIONS;
+
 
 // Loading posts
 const requestPosts = (url) => {
@@ -39,26 +46,17 @@ export const loadPosts = () => (dispatch, getState, postsAPI) => {
         });
 };
 
-// export function* loadPostsSaga() {
-//     try {
-//         const posts = yield call(postsAPI.getPosts());
-//         yield put(receivePosts(posts));
-//     } catch (error) {
-//         yield put (rejectPosts(error));
-//     }
-// }
-
 // Toggling favourites
 const requestUpdatingPost = (id) => {
     return {
-        type: 'UPDATING_POST_REQUEST',
+        type: UPDATING_POST_REQUEST,
         id
     }
 };
 
 const successUpdatingPost = (id, post) => {
     return {
-        type: 'UPDATING_POST_SUCCESS',
+        type: UPDATING_POST_SUCCESS,
         id,
         post
     }
@@ -66,7 +64,7 @@ const successUpdatingPost = (id, post) => {
 
 const rejectUpdatingPost = (id, error) => {
     return {
-        type: 'UPDATING_POST_FAILURE',
+        type: UPDATING_POST_FAILURE,
         id,
         error
     }
@@ -87,21 +85,21 @@ export const updatingPost = (id, data) => (dispatch, getState, postsAPI) => {
 // Deleting post
 const requestDeletingPost = (id) => {
     return {
-        type: 'DELETING_POST_REQUEST',
+        type: DELETING_POST_REQUEST,
         id
     }
 };
 
 const successDeletingPost = (post) => {
     return {
-        type: 'DELETING_POST_SUCCESS',
+        type: DELETING_POST_SUCCESS,
         id: post._id.$oid
     }
 };
 
 const rejectDeletingPost = (id, error) => {
     return {
-        type: 'DELETING_POST_FAILURE',
+        type: DELETING_POST_FAILURE,
         id,
         error
     }
@@ -123,7 +121,7 @@ export const deletingPost = (id) => (dispatch, getState, postsAPI) => {
 // Adding new post
 export const successAddingPost = (post) => {
     return {
-        type: 'ADDING_POST_SUCCESS',
+        type: ADDING_POST_SUCCESS,
         post
     }
 };
@@ -132,7 +130,7 @@ export const successAddingPost = (post) => {
 // Set active post
 export const setActivePost = (id) => {
     return {
-        type: 'SET_ACTIVE_POST',
+        type: SET_ACTIVE_POST,
         id
     }
 };

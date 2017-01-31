@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DefaultProfile extends Component {
+class PostDefault extends Component {
     render() {
         return (
             <div className="flex-center">React/Redux code snippet app</div>
@@ -8,4 +8,4 @@ class DefaultProfile extends Component {
     }
 }
 
-export default DefaultProfile;
+export default PostDefault;

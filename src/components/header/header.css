@@ -1,4 +1,5 @@
 .main-header {
+    flex: 0 0 auto;
     background-color: #2b303b;
     padding: 5px 25px;
 }

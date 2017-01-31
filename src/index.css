@@ -15,8 +15,6 @@ body {
     padding: 0;
     font-family: 'Open Sans', sans-serif;
     overflow: auto;
-    /*background-color: #181818;*/
-    /*background-color: #1a1a1a;*/
     background-color: #1B1C20;
     line-height: 1.5;
     color: rgba(255, 255, 255, .9);
@@ -46,11 +44,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-.main {
-    display: flex;
-    height: 100%;
-}
-
+/* TODO: move to utils.css */
 .flex-center {
     display: flex;
     height: 100%;

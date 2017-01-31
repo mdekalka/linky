@@ -2,18 +2,24 @@ import React, { Component } from 'react';
 import dateFormat from 'dateformat';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { successAddingPost } from '../../actions/posts.actions';
-import { updatingPost } from '../../actions/posts.actions';
 import promiseFinally from 'promise.prototype.finally';
-import './post.create.container.css';
 
-import dbService from '../../services/db.service';
-import postsService from '../../services/posts.service';
-import NewPost from './new-post/new-post';
+import './post-creator.css';
+
+import { successAddingPost } from '../../../actions/posts.actions';
+import { updatingPost } from '../../../actions/posts.actions';
+import dbService from '../../../services/db.service';
+import postsService from '../../../services/posts.service';
+import NewPost from './new-post/NewPost';
 import PostPreview from './post-preview/PostPreview';
 
 // will be a no-op if not needed
 promiseFinally.shim();
+
+const EDITOR_THEME = {
+    mode: 'javascript',
+    theme: 'monokai'
+};
 
 class PostCreator extends Component {
     constructor(props) {
@@ -85,7 +91,9 @@ class PostCreator extends Component {
     }
 
     onSubmit = (event) => {
+        debugger
         event.preventDefault();
+        debugger
 
         if (this.isEditMode) {
             this.onUpdatePost();
@@ -133,9 +141,10 @@ class PostCreator extends Component {
                 <div className="post-creator-container">
                     <NewPost 
                         labels={labels}
+                        theme={EDITOR_THEME}
                         isAdding={isLoading}
                         model={postModel}
-                        createNewPost={this.onSubmit}
+                        onAction={this.onSubmit}
                         updateCode={this.updateCode}
                         onTagsUpdate={this.onTagsUpdate}
                         onModelUpdate={this.onModelUpdate}
@@ -149,12 +158,15 @@ class PostCreator extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => {
+    // TODO: find a better solution to check how component used (edit/add mode) not relying on params
     if (ownProps.params.id) {
         return {
             post: state.posts.items.find(post => {
                 return post._id.$oid === ownProps.params.id
             })
         }
+    } else {
+        return {};
     }
 
 };

@@ -1,8 +1,7 @@
 import React from 'react';
-import './loader.component.css';
+import './loader.css';
 
 const Loader = ({ size = '', children }) => {
-
     return (
         <div className="loader">
             {children && <div className="loader-title">{children}</div>}

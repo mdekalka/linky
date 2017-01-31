@@ -1,8 +1,19 @@
+.main {
+    display: flex;
+    flex: 1 0 auto;
+    height: 100%;
+}
+
 .main-wrapper {
     display: flex;
 }
 
+.posts-list {
+    display: flex;
+}
+
 .menu-list-scroll {
+    width: 100%;
     overflow-y: auto;
 }
 
@@ -26,7 +37,7 @@
 .main-post {
     display: flex;
     align-items: center;
-    transform: translate3d(0 ,0, 0);
+    transform: translate3d(0, 0, 0);
     position: relative;
     padding: 25px;
     text-align: left;

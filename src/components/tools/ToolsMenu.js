@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import './tools-menu.css';
 import Search from '../../components/search/Search';
-import LabelSelect from '../../components/label-select/label-select.container';
+import LabelSelect from '../../components/label-select/LabelSelect';
 import * as filtersActions from '../../actions/filters.actions';
 import postsService from '../../services/posts.service';
 
@@ -42,7 +42,7 @@ class ToolsMenu extends Component {
         return (
             <div className="tools-container">
                 <div className="form">
-                   <Search onChange={this.updateFilters} ms={300} />
+                   <Search query={filters.query} onChange={this.updateFilters} ms={300} />
                     <div className="form-group">
                         <label className="form-label">
                             <input type="checkbox" checked={filters.isFavourite} onChange={(event) => this.updateFilters({isFavourite: event.target.checked })} />

@@ -4,7 +4,15 @@ import { createSelector } from 'reselect';
 
 const { LOAD_POST_REQUEST,
         LOAD_POST_SUCCESS,
-        LOAD_POST_FAILURE } = POSTS_ACTIONS;
+        LOAD_POST_FAILURE,
+        UPDATING_POST_REQUEST,
+        UPDATING_POST_SUCCESS,
+        UPDATING_POST_FAILURE,
+        DELETING_POST_REQUEST,
+        DELETING_POST_SUCCESS,
+        DELETING_POST_FAILURE,
+        ADDING_POST_SUCCESS,
+        SET_ACTIVE_POST } = POSTS_ACTIONS;
 const initialState = {
     items: [],
     isFetching: false,
@@ -17,7 +25,7 @@ const { PAGE_SIZE } = POSTS;
 
 const updatePostReducer = (state, action) => {
     switch (action.type) {
-        case 'UPDATING_POST_REQUEST':
+        case UPDATING_POST_REQUEST:
             return state.map(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
@@ -26,7 +34,7 @@ const updatePostReducer = (state, action) => {
                 }
             });
 
-        case 'UPDATING_POST_SUCCESS':
+        case UPDATING_POST_SUCCESS:
             return state.map(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
@@ -35,7 +43,7 @@ const updatePostReducer = (state, action) => {
                 }
             });
 
-        case 'UPDATING_POST_FAILURE':
+        case UPDATING_POST_FAILURE:
             return state.map(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
@@ -51,7 +59,7 @@ const updatePostReducer = (state, action) => {
 
 const deletePostReducer = (state, action) => {
     switch (action.type) {
-        case 'DELETING_POST_SUCCESS':
+        case DELETING_POST_SUCCESS:
             return state.filter(post => {
                 if (post._id.$oid !== action.id) {
                     return post;
@@ -82,20 +90,20 @@ const postReducer = (state = initialState, action) => {
         case LOAD_POST_FAILURE:
             return { ...state, isFetching: false, errorMessage: action.error };
 
-        case 'UPDATING_POST_REQUEST':
-        case 'DELETING_POST_REQUEST':
-        case 'UPDATING_POST_SUCCESS':
-        case 'UPDATING_POST_FAILURE':
-        case 'DELETING_POST_FAILURE':
+        case UPDATING_POST_REQUEST:
+        case DELETING_POST_REQUEST:
+        case UPDATING_POST_SUCCESS:
+        case UPDATING_POST_FAILURE:
+        case DELETING_POST_FAILURE:
             return { ...state, items: updatePostReducer(state.items, action) };
 
-        case 'DELETING_POST_SUCCESS':
+        case DELETING_POST_SUCCESS:
             return { ...state, items: deletePostReducer(state.items, action) };
 
-        case 'ADDING_POST_SUCCESS':
+        case ADDING_POST_SUCCESS:
             return { ...state, items: [ ...state.items, action.post ] };
 
-        case 'SET_ACTIVE_POST':
+        case SET_ACTIVE_POST:
             return { ...state, activeId: action.id };
 
         default:
@@ -110,7 +118,6 @@ const getFilters = (state, grid) => state.filters;
 const filterByQuery = (query) => (post) => post.title.toLowerCase().includes(query);
 const filterByName = (posts, name) => posts.filter(post => post.activeLabel.name === name);
 const filterByFavourite = (posts, isFavourite) => posts.filter(post => post.isFavourite);
-
 
 // Global selectors:
 export const selectActivePost = createSelector([getActiveId, getPosts], (id, posts) => {

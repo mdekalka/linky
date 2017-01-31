@@ -8,23 +8,38 @@ class Search  extends Component {
 
         this.delayedEvent = _.throttle(this.delayedEvent, props.ms);
         this.onChange = props.onChange;
+
+        this.state = {
+            value: ''
+        };
     }
 
-    delayedEvent(event) {
-        this.onChange({query: event.target.value})
+    delayedEvent(value) {
+        this.onChange({query: value})
     }
 
     change = (event) => {
         event.persist();
+        const { value } = event.target;
 
-        this.delayedEvent(event);
+        this.setState({ value });
+        this.delayedEvent(value);
+    }
+
+    resetValue(query, value) {
+        return !query ? '' : value;
     }
 
     render() {
+        const { query } = this.props;
+        let { value } = this.state;
+
+        value = this.resetValue(query, value);
+
         return (
             <div className="header-search">
                 <form className="form" >
-                    <input className="form-input" type="text" onChange={this.change} placeholder="Search post by title" />
+                    <input className="form-input" type="text" value={value} onChange={this.change} placeholder="Search post by title" />
                 </form>
             </div>
         )
