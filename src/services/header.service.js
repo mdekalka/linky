@@ -14,6 +14,11 @@ const headerService = {
         id: 3,
         name: 'About',
         ref: '/about'
+    },
+    {
+        id: 4,
+        name: 'Additional',
+        ref: '/additional'
     }],
 
     getHeaderMenu() {

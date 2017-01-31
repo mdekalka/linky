@@ -11,7 +11,7 @@ import PostView from '../components/posts/post-view/PostView';
 import PostCreator from '../components/posts/post-create/PostCreator';
 import About from '../components/about/About';
 import NotFound from '../components/not-found/NotFound';
-import ReduxSaga from '../components/redux-saga/ReduxSaga';
+import Additional from '../components/additional/Additional';
 
 const routes = (
     <Provider store={store} >
@@ -24,7 +24,7 @@ const routes = (
                 <Route path="/post-create" component={PostCreator} />
                 <Route path="/post-update/:id" isEditMode={true} component={PostCreator} />
                 <Route path="/about" component={About} />
-                <Route path="/redux-saga" component={ReduxSaga} />
+                <Route path="/additional" component={Additional} />
                 <Route path="*" component={NotFound} />
             </Route>
         </Router>
