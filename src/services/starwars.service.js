@@ -25,6 +25,14 @@ const starWarsAPI = {
         return instance.get(url)
             .then(successHandler)
             .catch(errorHandler)
+    },
+
+    getFilms() {
+        const url = createURL('films');
+
+        return instance.get(url)
+            .then(successHandler)
+            .catch(errorHandler)
     }
 };
 

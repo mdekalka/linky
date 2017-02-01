@@ -1,7 +1,15 @@
 .additional-container {
     display: flex;
-    padding: 25px;
-    justify-content: center;
+    flex: 1 0 auto;
     flex-direction: column;
+    overflow: auto;
+    height: 0;
+}
+
+.additional-content {
+    padding: 25px;
+    display: flex;
+    flex: 1 0 auto;
     align-items: center;
+    flex-direction: column;
 }

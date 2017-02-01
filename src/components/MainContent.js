@@ -13,7 +13,6 @@ class MainContent extends Component {
             </main>
         )
     }
-}
-
+};
 
 export default MainContent;
