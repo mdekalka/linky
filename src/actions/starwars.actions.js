@@ -1,4 +1,4 @@
-import { fork, call, put, takeLatest, takeEvery} from 'redux-saga/effects';
+import { fork, call, put, takeEvery} from 'redux-saga/effects';
 
 import starWarsAPI from '../services/starwars.service';
 

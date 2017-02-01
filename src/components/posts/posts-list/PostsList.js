@@ -9,6 +9,7 @@ const PostsList = ({ posts, getPosts, toggleFavourite, isFetching, isFirstLoad, 
     return (
         <div className="posts-list">
             {(isFetching && isFirstLoad) && <div className="flex-center"><Loader>Loading posts...</Loader></div>}
+            {!errorMessage && 
             <div className="menu-list-scroll">
                 <InfiniteScroll
                     pageStart={0}
@@ -22,6 +23,7 @@ const PostsList = ({ posts, getPosts, toggleFavourite, isFetching, isFirstLoad, 
                     </ul>
                 </InfiniteScroll>
             </div>
+            }
             {(errorMessage && !isFetching) &&
                 <div className="flex-center">
                     <ErrorMessage title="Posts loading failed. Please, reload the page." message={errorMessage} />

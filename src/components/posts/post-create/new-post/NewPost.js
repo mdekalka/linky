@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CodeMirror from 'react-codemirror';
 import { Link } from 'react-router';
 import classNames from 'classnames';

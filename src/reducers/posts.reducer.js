@@ -62,7 +62,9 @@ const deletePostReducer = (state, action) => {
         case DELETING_POST_SUCCESS:
             return state.filter(post => {
                 if (post._id.$oid !== action.id) {
-                    return post;
+                    return true;
+                } else {
+                    return false;
                 }
             });
         

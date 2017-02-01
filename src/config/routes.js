@@ -14,7 +14,6 @@ import NotFound from '../components/not-found/NotFound';
 import Additional from '../components/additional/Additional';
 import AdditionalLinks from '../components/additional/additional-links/AdditionalLinks';
 import ReduxSaga from '../components/additional/redux-saga/ReduxSaga';
-import Normalizr from '../components/additional/normalizr/Normalizr';
 
 const routes = (
     <Provider store={store} >
@@ -30,7 +29,6 @@ const routes = (
                 <Route path="/additional" component={Additional} >
                     <IndexRoute component={AdditionalLinks} />
                     <Route path="/additional/redux-saga" component={ReduxSaga} />
-                    <Route path="/additional/normalizr" component={Normalizr} />
                 </Route>
                 <Route path="*" component={NotFound} />
             </Route>

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import promiseFinally from 'promise.prototype.finally';
 
 import './post-creator.css';
-
 import { successAddingPost } from '../../../actions/posts.actions';
 import { updatingPost } from '../../../actions/posts.actions';
 import dbService from '../../../services/db.service';
@@ -79,21 +78,19 @@ class PostCreator extends Component {
         promiseFinally(dbService.addPost(preparedPost))
             .then(post => {
                 addPost(post);
-                this.setState({ isLoading: false });
-                this.props.router.push('/');
             })
             .catch(error => {
                 console.log(error);
             })
             .finally(() => {
-                this.setState({ isLoading: false });
+                this.setState({ isLoading: false }, () => {
+                    this.props.router.push('/');
+                });
             });
     }
 
     onSubmit = (event) => {
-        debugger
         event.preventDefault();
-        debugger
 
         if (this.isEditMode) {
             this.onUpdatePost();

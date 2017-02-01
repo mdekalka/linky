@@ -47,7 +47,6 @@ h1, h2, h3, h4, h5, h6 {
 /* TODO: move to utils.css */
 .flex-center {
     display: flex;
-    height: 100%;
     flex: auto;
     justify-content: center;
     align-items: center;
