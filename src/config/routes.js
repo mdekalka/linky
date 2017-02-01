@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, applyRouterMiddleware, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, applyRouterMiddleware, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import scrollConfig from './scrollConfig';
@@ -17,7 +17,7 @@ import ReduxSaga from '../components/additional/redux-saga/ReduxSaga';
 
 const routes = (
     <Provider store={store} >
-        <Router history={browserHistory} render={applyRouterMiddleware(scrollConfig)} >
+        <Router history={hashHistory} render={applyRouterMiddleware(scrollConfig)} >
             <Route path="/" component={App} >
                 <Route component={MainContent} >
                     <IndexRoute component={PostDefault} />

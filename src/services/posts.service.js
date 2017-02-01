@@ -7,22 +7,22 @@ const postsService = {
             {
                 id: 1,
                 name: 'javascript',
-                image: '/icons/js.svg'
+                image: 'icons/js.svg'
             },
             {
                 id: 2,
                 name: 'react',
-                image: '/icons/react.svg'
+                image: 'icons/react.svg'
             },
             {
                 id: 3,
                 name: 'redux',
-                image: '/icons/redux.svg'
+                image: 'icons/redux.svg'
             },
             {
                 id: 4,
                 name: 'angular',
-                image: '/icons/angular.svg'
+                image: 'icons/angular.svg'
             }
     ],
 
