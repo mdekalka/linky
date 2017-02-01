@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## In an effort to learn React/Redux, this is a simple code snippet box
+In an effort to learn React/Redux, this is a simple code snippet box
 
 See it in action at [Linky client](http://mdekalka.github.io/linky)
 
