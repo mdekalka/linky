@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -72,6 +72,11 @@ class PostView extends Component {
             </div>
         )
     }
+};
+
+PostView.propTypes = {
+    activePost: PropTypes.object.isRequired,
+    postsActions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {

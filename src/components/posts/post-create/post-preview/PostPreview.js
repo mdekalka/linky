@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { PrismCode } from 'react-prism';
 import classNames from 'classnames';
 
@@ -27,6 +27,15 @@ const PostPreview = ({ title, time, isFavourite, activeLabel, tags, code }) => {
             }
         </div>
     )
+};
+
+PostPreview.propTypes = {
+    title: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    isFavourite: PropTypes.bool.isRequired,
+    activeLabel: PropTypes.object.isRequired,
+    tags: PropTypes.array.isRequired,
+    code: PropTypes.string.isRequired
 };
 
 export default PostPreview;

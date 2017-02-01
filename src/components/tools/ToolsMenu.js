@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -59,6 +59,11 @@ class ToolsMenu extends Component {
     }
 };
 
+ToolsMenu.propTypes = {
+    filters: PropTypes.object.isRequired,
+    filtersActions: PropTypes.object.isRequired
+};
+
 const mapStateToProps = (state) => {
     return {
         filters: state.filters
@@ -66,9 +71,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-      return {
+    return {
         filtersActions: bindActionCreators(filtersActions, dispatch)
-      } 
+    } 
 };
 
 ToolsMenu = connect(mapStateToProps, mapDispatchToProps)(ToolsMenu);

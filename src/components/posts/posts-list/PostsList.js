@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import Loader from '../../loader/Loader';
@@ -32,7 +32,17 @@ const PostsList = ({ posts, getPosts, toggleFavourite, isFetching, isFirstLoad, 
             {(!isFetching && !posts.length) && <div className="flex-center">No items available</div>}
         </div>
     )
-}
+};
+
+PostsList.propTypes = {
+    posts: PropTypes.array.isRequired,
+    getPosts: PropTypes.func.isRequired,
+    toggleFavourite: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    isFirstLoad: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string.isRequired,
+    hasMoreItems: PropTypes.bool.isRequired
+};
 
 export default PostsList;
 

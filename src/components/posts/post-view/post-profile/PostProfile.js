@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { PrismCode } from 'react-prism';
 
@@ -39,6 +39,13 @@ const PostProfile = ({ post, updatePost, deletePost, toggleFavourite }) => {
             <PrismCode className="language-javascript">{post.code}</PrismCode>
         </div>
     )
+};
+
+PostProfile.propTypes = {
+    post: PropTypes.object.isRequired,
+    updatePost: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    toggleFavourite: PropTypes.func.isRequired
 };
 
 export default PostProfile

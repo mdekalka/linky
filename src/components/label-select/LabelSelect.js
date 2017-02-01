@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
 import './label-select.css';
@@ -41,6 +41,12 @@ class LabelSelect extends Component {
 LabelSelect.defaultProps = {
     list: [],
     activeItem: {}
+};
+
+LabelSelect.propTypes = {
+    list: PropTypes.array.isRequired,
+    activeItem: PropTypes.object,
+    onSelect: PropTypes.func.isRequired
 };
 
 export default LabelSelect;

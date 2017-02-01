@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const TagsSelect = ({ value, onUpdate }) => {
     const update = (event) => {
@@ -12,6 +12,11 @@ const TagsSelect = ({ value, onUpdate }) => {
             <input type="text" className="form-input" onChange={update} value={value} />
         </div>
     )
+};
+
+TagsSelect.propTypes = {
+    value: PropTypes.array,
+    onUpdate: PropTypes.func.isRequired
 };
 
 export default TagsSelect;

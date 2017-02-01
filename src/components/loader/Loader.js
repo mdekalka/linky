@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import './loader.css';
 
 const Loader = ({ size = '', children }) => {
@@ -8,6 +8,11 @@ const Loader = ({ size = '', children }) => {
             <div className={`leaf-loader ${size}`}></div>
         </div>
     )
+};
+
+Loader.propTypes = {
+    size: PropTypes.string,
+    children: PropTypes.node
 };
 
 export default Loader;

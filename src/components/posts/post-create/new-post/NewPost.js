@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import CodeMirror from 'react-codemirror';
 import { Link } from 'react-router';
 import classNames from 'classnames';
@@ -42,7 +42,20 @@ const NewPost = ({ labels, model, theme, isAdding, setActiveItem, onTagsUpdate, 
             </form>
         </div>
     )
-}
+};
+
+NewPost.propTypes = {
+    labels: PropTypes.array.isRequired,
+    model: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+    isAdding: PropTypes.bool.isRequired,
+    setActiveItem: PropTypes.func.isRequired,
+    onTagsUpdate: PropTypes.func.isRequired,
+    onModelUpdate: PropTypes.func.isRequired,
+    updateCode: PropTypes.func.isRequired,
+    editMode: PropTypes.bool,
+    onAction: PropTypes.func.isRequired,
+};
 
 export default NewPost;
 

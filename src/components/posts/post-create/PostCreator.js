@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import dateFormat from 'dateformat';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -152,6 +152,11 @@ class PostCreator extends Component {
             </main>
         )
     }
+};
+
+PostCreator.propTypes = {
+    addPost: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {

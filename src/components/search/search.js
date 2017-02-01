@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
 import './search.css';
 
@@ -44,6 +44,12 @@ class Search  extends Component {
             </div>
         )
     }
-}
+};
+
+Search.propTypes = {
+    query: PropTypes.string.isRequired,
+    ms: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
+};
 
 export default Search;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -75,6 +75,15 @@ class PostsView extends Component {
             </div>
         )
     }
+};
+
+PostsView.propTypes = {
+    filters: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    isFirstLoad: PropTypes.bool.isRequired,
+    errorMessage: PropTypes.string.isRequired,
+    hasMoreItems: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {

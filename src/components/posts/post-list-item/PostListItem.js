@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import dateFormat from 'dateformat';
 import { Link } from 'react-router';
@@ -38,6 +38,11 @@ const PostListItem = ({ post, toggleFavourite }) => {
             </Link>
         </li>
     )
+};
+
+PostListItem.propTypes = {
+    post: PropTypes.object.isRequired,
+    toggleFavourite: PropTypes.func.isRequired
 };
 
 export default PostListItem;

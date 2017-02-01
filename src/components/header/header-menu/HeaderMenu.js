@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import './header-menu.css';
 
@@ -14,6 +14,10 @@ const HeaderMenu = ({ list }) => {
             })}
         </ul>
     )
+};
+
+HeaderMenu.propTypes = {
+    list: PropTypes.array
 };
 
 export default HeaderMenu;

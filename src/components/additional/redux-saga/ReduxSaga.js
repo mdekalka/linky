@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -75,7 +75,15 @@ class ReduxSaga extends Component {
             </div>
         )
     }
-}
+};
+
+ReduxSaga.propTypes = {
+    starWars: PropTypes.object.isRequired,
+    loadPeople: PropTypes.func.isRequired,
+    loadFilms: PropTypes.func.isRequired,
+    requestLoadingPeopleSaga: PropTypes.func.isRequired,
+    requestLoadingFilmsSaga: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {

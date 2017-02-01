@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import './about-links.css';
 
 const AboutLinks = ({ links }) => {
@@ -14,6 +14,10 @@ const AboutLinks = ({ links }) => {
             })}
         </ul>
     )
-}
+};
+
+AboutLinks.propTypes = {
+    links: PropTypes.array
+};
 
 export default AboutLinks;
