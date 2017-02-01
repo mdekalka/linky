@@ -4,5 +4,5 @@ In an effort to learn React/Redux, this is a simple code snippet box
 
 See it in action at [Linky client](http://mdekalka.github.io/linky)
 
-## Available Scripts
+### Available Scripts
 All scripts that are available in create-react-app
